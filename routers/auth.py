@@ -1,30 +1,45 @@
-from fastapi import APIRouter, HTTPException, Header
-from schemas.user import UserRegister, UserLogin
+from fastapi import APIRouter, HTTPException, Header,Depends
+
+from sqlalchemy.orm import Session
+from db.database import SessionLocal
+from schemas.user import UserRegister, UserLogin,UserCreate
 from utils.auth import hash_password, verify_password, user_exists, save_user, fake_users_temporal_db, get_user
 from utils.auth_token import decode_access_token, create_access_token
+from utils.db_user import get_user_by_email_db, create_user_db, user_exists_db
+
 
 router = APIRouter()
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 @router.post("/register")
-async def register(user: UserRegister):
-    if user_exists(user.email):
+async def register(user: UserRegister, db: Session = Depends(get_db)):
+    if user_exists_db(db,user.email):
         raise HTTPException(status_code=400, detail="Email already exists")
+
     hashed_password = hash_password(user.password)
-    save_user(user.email , hashed_password)
+    user_data = UserCreate(email=user.email,hashed_password=hashed_password)
+    create_user_db(db,user_data)
+
     # in futrue maybe should add status code (201)
     return {"message": "User created successfully"}
 
 
 @router.post("/login")
-async def login(user: UserLogin):
-    if not user_exists(user.email):
+async def login(user: UserLogin, db: Session = Depends(get_db)):
+    db_user = get_user_by_email_db(db, user.email)
+    if not db_user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
-    hashed_password=get_user(user.email)
-    if not verify_password(user.password,hashed_password):
+    if not verify_password(user.password, db_user.hashed_password):
         raise HTTPException(status_code=400, detail="Invalid credentials")
     token = create_access_token({"sub": user.email})
-    return {"access_token": token}
-
+    return {"access_token": token, "token_type": "bearer"}
 
 
 @router.get("/me")
