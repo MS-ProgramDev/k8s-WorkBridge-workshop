@@ -35,9 +35,9 @@ async def register(user: UserRegister, db: Session = Depends(get_db)):
 async def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = get_user_by_email_db(db, user.email)
     if not db_user:
-        raise HTTPException(status_code=400, detail="Invalid credentials")
+        raise HTTPException(status_code=401, detail="Invalid credentials")
     if not verify_password(user.password, db_user.hashed_password):
-        raise HTTPException(status_code=400, detail="Invalid credentials")
+        raise HTTPException(status_code=401, detail="Invalid credentials")
     token = create_access_token({"sub": user.email})
     return {"access_token": token, "token_type": "bearer"}
 

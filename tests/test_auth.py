@@ -113,5 +113,5 @@ def test_me_unauthorized():
     Test accessing /me without any token.
     Expect: HTTP 401 Unauthorized.
     """
-    response_message = client.get("/me")
+    response_message = client.get("/me", headers={})
     assert response_message.status_code == 401
