@@ -1,14 +1,7 @@
 from passlib.context import CryptContext
 from pydantic import BaseModel, EmailStr
 
-"""
 
-def save_user(email: EmailStr, hashed_password: str):
-    fake_users_temporal_db[email] = hashed_password
-
-def get_user(email: EmailStr) -> str:
-    return fake_users_temporal_db.get(email)
-"""
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:

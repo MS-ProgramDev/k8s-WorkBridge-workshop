@@ -2,9 +2,12 @@ import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr
 from routers import auth as auth_routes
+from utils import logging_config
 app = FastAPI()
 
-app.include_router(auth_routes.router)
+#app.include_router(auth_routes.router)
+
+app.include_router(auth_routes.router, prefix="/auth", tags=["auth"])
 
 
 
