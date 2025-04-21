@@ -1,0 +1,34 @@
+19-04-2025 16:20:19.744 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+19-04-2025 16:20:19.839 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Python312\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+19-04-2025 16:20:20.085 [INFO] [auth.py:36 - register()] User successfully created in database: user@example.com
+19-04-2025 16:20:28.206 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+19-04-2025 16:20:28.209 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: user@example.com
+19-04-2025 16:20:29.798 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+19-04-2025 16:20:29.799 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: user@example.com
+19-04-2025 16:20:30.630 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+19-04-2025 16:20:30.631 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: user@example.com
+19-04-2025 16:20:31.528 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+19-04-2025 16:20:31.530 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: user@example.com
+19-04-2025 16:20:40.861 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+19-04-2025 16:20:59.283 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+19-04-2025 16:22:35.361 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+19-04-2025 16:22:39.238 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+19-04-2025 16:22:43.295 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+19-04-2025 16:22:44.725 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+21-04-2025 20:24:06.513 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+21-04-2025 20:24:06.617 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: user@example.com
+21-04-2025 20:24:12.771 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+21-04-2025 20:30:42.469 [INFO] [auth.py:24 - register()] Received registration request for email: user2@example.com
+21-04-2025 20:30:42.721 [INFO] [auth.py:36 - register()] User successfully created in database: user2@example.com
+21-04-2025 20:30:46.578 [INFO] [auth.py:24 - register()] Received registration request for email: user2@example.com
+21-04-2025 20:30:46.581 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: user2@example.com
+21-04-2025 20:31:57.427 [INFO] [auth.py:44 - login()] Login attempt for email: user2@example.com
+21-04-2025 22:30:45.858 [INFO] [auth.py:24 - register()] Received registration request for email: user3@example.com
+21-04-2025 22:30:46.287 [INFO] [auth.py:36 - register()] User successfully created in database: user3@example.com
+21-04-2025 22:30:55.047 [INFO] [auth.py:44 - login()] Login attempt for email: user3@example.com
+21-04-2025 22:39:53.677 [INFO] [auth.py:44 - login()] Login attempt for email: user3@example.com

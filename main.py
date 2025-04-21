@@ -2,28 +2,26 @@ import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr
 from routers import auth as auth_routes
+from routers import chat as chat_routes
 from utils import logging_config
-app = FastAPI()
 
-#app.include_router(auth_routes.router)
+app = FastAPI(
+    title="WorkBridge API",
+    description="Slack-like corporate communication platform API",
+    version="1.0.0"
+)
 
+# Include routers
 app.include_router(auth_routes.router, prefix="/auth", tags=["auth"])
-
-
-
-
+app.include_router(chat_routes.router, prefix="/chat", tags=["chat"])
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
-
+    return {"message": "Welcome to WorkBridge API", "docs": "/docs"}
 
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
-
-
 if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0", port=8000)
-  #uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True, access_log=False)
