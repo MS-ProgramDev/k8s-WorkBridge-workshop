@@ -11,6 +11,8 @@ from utils.db_chat import (
     add_user_to_group_db, get_group_db, get_group_messages_db,
     is_user_in_group_db
 )
+# ADD THIS IMPORT - This is the missing import
+from models import chat as models
 
 logger = logging.getLogger(__name__)
 

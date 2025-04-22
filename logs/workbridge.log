@@ -32,3 +32,27 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 21-04-2025 22:30:46.287 [INFO] [auth.py:36 - register()] User successfully created in database: user3@example.com
 21-04-2025 22:30:55.047 [INFO] [auth.py:44 - login()] Login attempt for email: user3@example.com
 21-04-2025 22:39:53.677 [INFO] [auth.py:44 - login()] Login attempt for email: user3@example.com
+21-04-2025 23:45:01.823 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+21-04-2025 23:45:27.659 [INFO] [chat.py:91 - get_my_messages()] Received request to get messages
+21-04-2025 23:46:12.737 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+21-04-2025 23:46:25.664 [INFO] [chat.py:90 - get_my_messages()] Received request to get messages
+21-04-2025 23:48:29.535 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+21-04-2025 23:48:39.335 [INFO] [chat.py:90 - get_my_messages()] Received request to get messages
+21-04-2025 23:48:39.350 [INFO] [chat.py:94 - get_my_messages()] Retrieved 0 messages for user@example.com
+21-04-2025 23:49:56.247 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+21-04-2025 23:51:31.071 [INFO] [chat.py:90 - get_my_messages()] Received request to get messages
+21-04-2025 23:51:31.073 [INFO] [chat.py:94 - get_my_messages()] Retrieved 0 messages for user@example.com
+21-04-2025 23:51:37.577 [INFO] [chat.py:90 - get_my_messages()] Received request to get messages
+21-04-2025 23:51:37.578 [ERROR] [chat.py:41 - get_current_user()] Error decoding token: Invalid token
+21-04-2025 23:51:42.204 [INFO] [chat.py:90 - get_my_messages()] Received request to get messages
+21-04-2025 23:51:42.207 [INFO] [chat.py:94 - get_my_messages()] Retrieved 0 messages for user@example.com
+21-04-2025 23:53:07.042 [INFO] [chat.py:102 - get_my_messages()] Received request to get messages
+21-04-2025 23:53:07.131 [INFO] [chat.py:106 - get_my_messages()] Retrieved 0 messages for user@example.com
+22-04-2025 14:28:17.999 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+22-04-2025 14:28:34.626 [INFO] [chat.py:102 - get_my_messages()] Received request to get messages
+22-04-2025 14:28:34.647 [INFO] [chat.py:106 - get_my_messages()] Retrieved 0 messages for user@example.com
+22-04-2025 14:52:22.794 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+22-04-2025 14:52:38.658 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+22-04-2025 14:52:38.667 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for user@example.com
+22-04-2025 14:52:47.267 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 14:52:47.297 [INFO] [chat.py:83 - send_message()] Message created: 1

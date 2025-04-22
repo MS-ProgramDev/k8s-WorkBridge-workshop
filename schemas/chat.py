@@ -17,6 +17,9 @@ class MessageOut(BaseModel):
     timestamp: datetime
     is_group: bool
 
+    class Config:
+        from_attributes = True  # Allows the model to work with SQLAlchemy objects
+
 
 class GroupCreate(BaseModel):
     name: str
