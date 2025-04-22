@@ -11,7 +11,6 @@ from utils.db_chat import (
     add_user_to_group_db, get_group_db, get_group_messages_db,
     is_user_in_group_db
 )
-from models.chat import Message, Group, GroupMembership
 
 logger = logging.getLogger(__name__)
 
@@ -50,12 +49,16 @@ def get_current_user(authorization: str = Header(...)):
 async def send_message(
     message: MessageCreate, 
     db: Session = Depends(get_db),
-    authorization: str = Header(...)
+    authorization: str = Header(None)
 ):
     """
     Send a message to another user or a group
     """
     logger.info("Received request to send message")
+    
+    if not authorization:
+        raise HTTPException(status_code=401, detail="Authorization header missing")
+    
     current_user = get_current_user(authorization)
     
     # If sending to a group, verify the group exists and user is a member
@@ -77,7 +80,15 @@ async def send_message(
     created_message = create_message_db(db, message, current_user)
     logger.info(f"Message created: {created_message.id}")
     
-    return created_message
+    # Convert to response model to ensure proper serialization
+    return MessageOut(
+        id=created_message.id,
+        sender_id=created_message.sender_id,
+        recipient_id=created_message.recipient_id,
+        content=created_message.content,
+        timestamp=created_message.timestamp,
+        is_group=created_message.is_group
+    )
 
 
 @router.get("/messages/", response_model=List[MessageOut])
@@ -110,14 +121,14 @@ async def get_messages_with_user(
     current_user = get_current_user(authorization)
     
     # Query for messages between these two users
-    messages = db.query(Message).filter(
-        ((Message.sender_id == current_user) & 
-         (Message.recipient_id == user_id) & 
-         ~Message.is_group) |
-        ((Message.sender_id == user_id) & 
-         (Message.recipient_id == current_user) & 
-         ~Message.is_group)
-    ).order_by(Message.timestamp).all()
+    messages = db.query(models.Message).filter(
+        ((models.Message.sender_id == current_user) & 
+         (models.Message.recipient_id == user_id) & 
+         ~models.Message.is_group) |
+        ((models.Message.sender_id == user_id) & 
+         (models.Message.recipient_id == current_user) & 
+         ~models.Message.is_group)
+    ).order_by(models.Message.timestamp).all()
     
     logger.info(f"Retrieved {len(messages)} messages between {current_user} and {user_id}")
     return messages
