@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    environment {
+        PROJECT_DIR = 'C:/Users/Shayo/Desktop/serious/school/year3/sadna/k8s-WorkBridge-workshop'
+    }
+
+    stages {
+        stage('Start Server') {
+            steps {
+                echo 'Starting WorkBridge server...'
+
+                powershell '''
+                    cd "${env:PROJECT_DIR}"
+                
+                    Write-Output "Current directory: $(Get-Location)"
+                    .venv/Scripts/python.exe --version
+                    .venv/Scripts/python.exe -m uvicorn main:app --reload
+                '''
+            }
+        }
+    }
+}

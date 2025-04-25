@@ -56,3 +56,64 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 22-04-2025 14:52:38.667 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for user@example.com
 22-04-2025 14:52:47.267 [INFO] [chat.py:59 - send_message()] Received request to send message
 22-04-2025 14:52:47.297 [INFO] [chat.py:83 - send_message()] Message created: 1
+22-04-2025 14:55:34.916 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+22-04-2025 14:55:58.225 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 15:05:32.129 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 15:15:39.080 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 15:15:39.116 [INFO] [chat.py:83 - send_message()] Message created: 2
+22-04-2025 15:26:15.835 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 15:26:15.836 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: Token has expired
+22-04-2025 15:26:27.790 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 15:26:27.791 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: Token has expired
+22-04-2025 15:26:36.246 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+22-04-2025 15:26:48.750 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 15:26:48.756 [INFO] [chat.py:83 - send_message()] Message created: 3
+22-04-2025 15:26:59.661 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 18:49:13.312 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+22-04-2025 18:49:32.891 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+22-04-2025 18:50:06.413 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 18:50:48.558 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 18:51:48.707 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+22-04-2025 18:52:10.334 [INFO] [chat.py:59 - send_message()] Received request to send message
+22-04-2025 18:52:10.376 [INFO] [chat.py:83 - send_message()] Message created: 4
+25-04-2025 16:04:20.845 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:04:43.042 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-04-2025 16:04:43.087 [INFO] [chat.py:83 - send_message()] Message created: 5
+25-04-2025 16:11:53.705 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:13:53.722 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:17:25.986 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:19:17.620 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:22:07.419 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:22:54.194 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:23:05.325 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-04-2025 16:23:05.351 [INFO] [chat.py:83 - send_message()] Message created: 6
+25-04-2025 16:23:11.706 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-04-2025 16:23:11.713 [INFO] [chat.py:83 - send_message()] Message created: 7
+25-04-2025 16:36:09.197 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 16:36:20.657 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-04-2025 16:36:20.688 [INFO] [chat.py:83 - send_message()] Message created: 8
+25-04-2025 18:19:26.809 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 18:19:26.961 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+25-04-2025 18:19:29.266 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-04-2025 18:19:29.286 [INFO] [chat.py:83 - send_message()] Message created: 9
+25-04-2025 18:30:26.907 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 18:30:27.035 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+25-04-2025 18:32:30.478 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+25-04-2025 18:32:30.567 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+25-04-2025 18:32:32.943 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-04-2025 18:32:32.968 [INFO] [chat.py:83 - send_message()] Message created: 10

@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    
+    environment {
+        SERVER_URL = "http://localhost:8000/docs#/default/root__get"
+        TEST_USER_EMAIL = "user@example.com"
+        TEST_USER_PASSWORD = "string"
+        TEST_RECIPIENT = "user2@example.com"
+        PROJECT_DIR = "C:\\Users\\Shayo\\Desktop\\serious\\school\\year3\\sadna\\k8s-WorkBridge-workshop"
+        PYTHON_ENV = "${env.WORKSPACE}/venv"
+    }
+    
+    stages {
+
+        
+        stage('Run API Tests') {
+            steps {
+                echo 'Running API tests...'
+                powershell '''
+                    cd "${env:PROJECT_DIR}"
+                    # Activate virtual environment
+                    & "$env:PYTHON_ENV\\Scripts\\Activate.ps1"
+                    # Run the tests
+                    Write-Host "Running tests against server at $env:SERVER_URL"
+                    python test_login_chat.py
+                    # Get the exit code and pass it to Jenkins
+                    if ($LASTEXITCODE -ne 0) {
+                        Write-Host "Tests failed with exit code: $LASTEXITCODE"
+                        exit $LASTEXITCODE
+                    } else {
+                        Write-Host "Tests passed successfully!"
+                    }
+                '''
+            }
+        }
+    }
+}
