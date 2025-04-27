@@ -117,3 +117,87 @@ Traceback (most recent call last):
 AttributeError: module 'bcrypt' has no attribute '__about__'
 25-04-2025 18:32:32.943 [INFO] [chat.py:59 - send_message()] Received request to send message
 25-04-2025 18:32:32.968 [INFO] [chat.py:83 - send_message()] Message created: 10
+27-04-2025 14:49:00.579 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+27-04-2025 14:49:00.870 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+27-04-2025 14:49:03.274 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 14:49:03.316 [INFO] [chat.py:83 - send_message()] Message created: 11
+27-04-2025 14:54:35.973 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+27-04-2025 14:54:36.093 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+27-04-2025 14:54:47.227 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 14:54:47.252 [INFO] [chat.py:83 - send_message()] Message created: 12
+27-04-2025 15:01:11.402 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+27-04-2025 15:01:11.619 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+27-04-2025 15:02:12.078 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+27-04-2025 15:02:42.042 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+27-04-2025 15:02:42.042 [WARNING] [chat.py:32 - get_current_user()] Invalid authorization header format
+27-04-2025 15:02:48.366 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+27-04-2025 15:02:48.393 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for user@example.com
+27-04-2025 15:05:31.612 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+27-04-2025 15:05:31.616 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for user@example.com
+27-04-2025 15:05:54.452 [INFO] [chat.py:148 - create_group()] Received request to create group
+27-04-2025 15:05:54.527 [INFO] [chat.py:157 - create_group()] Group created: 1
+27-04-2025 15:07:06.328 [INFO] [chat.py:170 - join_group()] Received request to join group 1
+27-04-2025 15:07:06.332 [INFO] [chat.py:182 - join_group()] User user@example.com joined group 1
+27-04-2025 15:07:08.872 [INFO] [chat.py:170 - join_group()] Received request to join group 1
+27-04-2025 15:07:08.877 [INFO] [chat.py:182 - join_group()] User user@example.com joined group 1
+27-04-2025 15:09:52.608 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 15:09:52.620 [INFO] [chat.py:83 - send_message()] Message created: 13
+27-04-2025 15:09:57.000 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 15:09:57.002 [WARNING] [chat.py:71 - send_message()] Group 2 not found
+27-04-2025 15:10:01.654 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 15:10:01.664 [INFO] [chat.py:83 - send_message()] Message created: 14
+27-04-2025 15:10:57.768 [INFO] [chat.py:195 - get_group_messages()] Received request to get messages for group 1
+27-04-2025 15:10:57.778 [INFO] [chat.py:215 - get_group_messages()] Retrieved 2 messages for group 1
+27-04-2025 18:26:32.743 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+27-04-2025 18:26:32.933 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+27-04-2025 18:26:35.342 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 18:26:35.389 [INFO] [chat.py:83 - send_message()] Message created: 15
+27-04-2025 18:26:37.477 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+27-04-2025 18:26:37.526 [INFO] [chat.py:108 - get_my_messages()] Retrieved 15 messages for user@example.com
+27-04-2025 18:26:39.577 [INFO] [chat.py:148 - create_group()] Received request to create group
+27-04-2025 18:26:39.611 [INFO] [chat.py:157 - create_group()] Group created: 2
+27-04-2025 18:26:41.669 [INFO] [chat.py:170 - join_group()] Received request to join group 2
+27-04-2025 18:26:41.676 [INFO] [chat.py:182 - join_group()] User user@example.com joined group 2
+27-04-2025 18:26:43.749 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 18:26:43.764 [INFO] [chat.py:83 - send_message()] Message created: 16
+27-04-2025 18:26:45.815 [INFO] [chat.py:195 - get_group_messages()] Received request to get messages for group 2
+27-04-2025 18:26:45.824 [INFO] [chat.py:215 - get_group_messages()] Retrieved 1 messages for group 2
+27-04-2025 18:28:51.458 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+27-04-2025 18:28:51.718 [WARNING] [bcrypt.py:622 - _load_backend_mixin()] (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\Shayo\Desktop\serious\school\year3\sadna\k8s-WorkBridge-workshop\.venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+27-04-2025 18:28:54.119 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 18:28:54.146 [INFO] [chat.py:83 - send_message()] Message created: 17
+27-04-2025 18:28:56.197 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+27-04-2025 18:28:56.207 [INFO] [chat.py:108 - get_my_messages()] Retrieved 17 messages for user@example.com
+27-04-2025 18:28:58.251 [INFO] [chat.py:148 - create_group()] Received request to create group
+27-04-2025 18:28:58.287 [INFO] [chat.py:157 - create_group()] Group created: 3
+27-04-2025 18:29:00.346 [INFO] [chat.py:170 - join_group()] Received request to join group 3
+27-04-2025 18:29:00.352 [INFO] [chat.py:182 - join_group()] User user@example.com joined group 3
+27-04-2025 18:29:02.387 [INFO] [chat.py:59 - send_message()] Received request to send message
+27-04-2025 18:29:02.398 [INFO] [chat.py:83 - send_message()] Message created: 18
+27-04-2025 18:29:04.437 [INFO] [chat.py:195 - get_group_messages()] Received request to get messages for group 3
+27-04-2025 18:29:04.442 [INFO] [chat.py:215 - get_group_messages()] Retrieved 1 messages for group 3
