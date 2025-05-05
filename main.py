@@ -5,10 +5,22 @@ from routers import auth as auth_routes
 from routers import chat as chat_routes
 from utils import logging_config
 
+
+
 app = FastAPI(
     title="WorkBridge API",
     description="Slack-like corporate communication platform API",
     version="1.0.0"
+)
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Include routers
@@ -24,4 +36,4 @@ async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 if __name__ == '__main__':
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

@@ -201,3 +201,9 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 27-04-2025 18:29:02.398 [INFO] [chat.py:83 - send_message()] Message created: 18
 27-04-2025 18:29:04.437 [INFO] [chat.py:195 - get_group_messages()] Received request to get messages for group 3
 27-04-2025 18:29:04.442 [INFO] [chat.py:215 - get_group_messages()] Retrieved 1 messages for group 3
+01-05-2025 20:26:56.884 [INFO] [chat.py:59 - send_message()] Received request to send message
+05-05-2025 15:37:51.149 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+05-05-2025 16:11:39.832 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+05-05-2025 16:11:40.250 [INFO] [auth.py:36 - register()] User successfully created in database: user@example.com
+05-05-2025 16:58:27.134 [INFO] [auth.py:24 - register()] Received registration request for email: maor@gmailc.om
+05-05-2025 16:58:27.440 [INFO] [auth.py:36 - register()] User successfully created in database: maor@gmailc.om
