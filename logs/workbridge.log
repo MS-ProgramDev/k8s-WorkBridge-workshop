@@ -207,3 +207,9 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 05-05-2025 16:11:40.250 [INFO] [auth.py:36 - register()] User successfully created in database: user@example.com
 05-05-2025 16:58:27.134 [INFO] [auth.py:24 - register()] Received registration request for email: maor@gmailc.om
 05-05-2025 16:58:27.440 [INFO] [auth.py:36 - register()] User successfully created in database: maor@gmailc.om
+05-05-2025 18:08:14.846 [INFO] [auth.py:24 - register()] Received registration request for email: dsa@c.com
+05-05-2025 18:08:15.186 [INFO] [auth.py:36 - register()] User successfully created in database: dsa@c.com
+05-05-2025 18:08:17.425 [INFO] [auth.py:24 - register()] Received registration request for email: dsa@c.com
+05-05-2025 18:08:17.428 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: dsa@c.com
+05-05-2025 19:36:18.625 [INFO] [auth.py:24 - register()] Received registration request for email: fds@gmail.com
+05-05-2025 19:36:18.882 [INFO] [auth.py:36 - register()] User successfully created in database: fds@gmail.com

@@ -4,6 +4,7 @@ from pydantic import BaseModel, EmailStr
 from routers import auth as auth_routes
 from routers import chat as chat_routes
 from utils import logging_config
+from fastapi.middleware.cors import CORSMiddleware
 
 
 
@@ -13,7 +14,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
