@@ -213,3 +213,52 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 05-05-2025 18:08:17.428 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: dsa@c.com
 05-05-2025 19:36:18.625 [INFO] [auth.py:24 - register()] Received registration request for email: fds@gmail.com
 05-05-2025 19:36:18.882 [INFO] [auth.py:36 - register()] User successfully created in database: fds@gmail.com
+09-05-2025 13:59:29.298 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+09-05-2025 13:59:34.383 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+09-05-2025 14:04:06.543 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+09-05-2025 14:04:08.430 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+09-05-2025 14:04:12.224 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+09-05-2025 14:07:15.449 [INFO] [auth.py:24 - register()] Received registration request for email: user@example.com
+09-05-2025 14:07:15.557 [WARNING] [auth.py:27 - register()] Registration failed: email already exists: user@example.com
+09-05-2025 14:08:15.053 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+09-05-2025 14:08:17.277 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+09-05-2025 14:13:26.686 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+09-05-2025 14:13:29.488 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+09-05-2025 14:25:12.602 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+09-05-2025 14:27:56.296 [INFO] [auth.py:24 - register()] Received registration request for email: user1@example.com
+09-05-2025 14:27:57.062 [INFO] [auth.py:36 - register()] User successfully created in database: user1@example.com
+09-05-2025 14:28:14.847 [INFO] [auth.py:44 - login()] Login attempt for email: user1@example.com
+09-05-2025 14:41:14.558 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+09-05-2025 14:50:54.444 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+09-05-2025 14:50:56.460 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 12:02:39.260 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:21:55.171 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:33:47.008 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:40:04.943 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:44:51.450 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:46:37.767 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:50:45.704 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:53:38.056 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 14:59:37.832 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 15:10:34.547 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 15:10:37.641 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 15:14:42.431 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 15:22:48.802 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 15:30:05.461 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 15:30:45.132 [INFO] [auth_token.py:57 - get_current_user()] Trying to decode token: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ2ODgyMDA1fQ.GbMeQZFQWDb3hQ8ZnTdHBt6ceQxwWzxXqdwczg9NmdM
+10-05-2025 15:32:45.189 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+10-05-2025 15:33:17.363 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ2ODgyMTY1fQ.cIQipVF2M3VpeGqJ_eVfpGwcHgfr6PhNG5mVNK8pYgQ
+10-05-2025 15:33:19.322 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ2ODgyMTY1fQ.cIQipVF2M3VpeGqJ_eVfpGwcHgfr6PhNG5mVNK8pYgQ
+12-05-2025 10:06:18.647 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+12-05-2025 10:06:22.061 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+12-05-2025 10:06:57.750 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ3MDM1MzgyfQ._Q66cl08l6t3ipMXp0XhtWKy2pwhLnKb3thJ4tsUaoY
+12-05-2025 10:18:02.248 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+12-05-2025 10:18:39.734 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ3MDM2MDgzfQ.MfW9na7goaKY4cl6LvYYQgD4Y9HLFR53_Vo6Uzvvhxo
+12-05-2025 10:18:43.870 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ3MDM2MDgzfQ.MfW9na7goaKY4cl6LvYYQgD4Y9HLFR53_Vo6Uzvvhxo
+12-05-2025 10:22:18.926 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ3MDM2MDgzfQ.MfW9na7goaKY4cl6LvYYQgD4Y9HLFR53_Vo6Uzvvhxo
+12-05-2025 10:27:36.678 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+12-05-2025 10:28:08.741 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ3MDM2NjU3fQ.Ac2NSB2lsa_U_32KMGEm9bPA4sDwrNslJPEEiVLGXXc
+12-05-2025 10:49:13.528 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+12-05-2025 10:54:47.487 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+12-05-2025 10:55:16.913 [INFO] [auth_token.py:56 - get_current_user()] Trying to decode token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzQ3MDM4Mjg3fQ.YQCVu-KNRUze-TQYfx4fdWKS0_z6dlYJ43BVMD5NpX8
+12-05-2025 11:13:48.290 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com

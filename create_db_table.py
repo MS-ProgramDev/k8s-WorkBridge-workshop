@@ -13,6 +13,7 @@ Note:
 from db.database import Base, engine
 import models.user
 import models.chat  # ADD THIS IMPORT
+import models.post
 
 
 # Create all tables defined by models inheriting from Base

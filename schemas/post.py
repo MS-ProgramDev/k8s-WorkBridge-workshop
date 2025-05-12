@@ -12,5 +12,5 @@ class PostCreate(BaseModel):
 class PostOut(BaseModel):
     id: int  # Unique identifier for the post
     content: str  # The text content of the post
-    author_email: str  # The email of the user who created the post (extracted from JWT)
-    timestamp: datetime  # When the post was created (auto-generated)
+    user_email: str  # The email of the user who created the post (extracted from JWT)
+    created_at: datetime  # When the post was created (auto-generated)

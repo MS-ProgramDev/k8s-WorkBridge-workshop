@@ -60,6 +60,34 @@ def test_login_success():
     assert "access_token" in data
     assert data["token_type"] == "bearer"
 
+
+def test_create_post_after_login():
+    # ודא שהמשתמש קיים
+    client.post("/register", json={
+        "email": "login@example.com",
+        "password": "password1"
+    })
+
+    # התחברות כדי לקבל access_token
+    response = client.post("/login", json={
+        "email": "login@example.com",
+        "password": "password1"
+    })
+    assert response.status_code == 200
+    token = response.json()["access_token"]
+
+    # שליחת בקשת POST ליצירת פוסט
+    headers = {"Authorization": f"Bearer {token}"}
+    post_data = {
+        "content": "זהו פוסט לבדיקה"
+    }
+    post_response = client.post("/posts/", json=post_data, headers=headers)
+
+    assert post_response.status_code in (200, 201)
+    post_result = post_response.json()
+    assert post_result["content"] == post_data["content"]
+    assert "id" in post_result
+
 def test_login_wrong_password():
     """
     Test login with correct email but wrong password.
