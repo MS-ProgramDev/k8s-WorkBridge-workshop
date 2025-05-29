@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import Feed from './pages/Feed';
 import Settings from './pages/Settings';
+import Chat from './pages/Chat';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </Router>
     </AuthProvider>

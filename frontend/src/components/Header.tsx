@@ -40,6 +40,7 @@ const Header = () => {
           <>
             <Link to="/dashboard" className="nav-link">Dashboard</Link>
             <Link to="/feed" className="nav-link">Feed</Link>
+            <Link to="/chat" className="nav-link">Chat</Link>
             <Link to="/profile" className="nav-link">Profile</Link>
             <Link to="/settings" className="nav-link">Settings</Link>
             <span className="nav-link" style={{ color: '#666' }}>
