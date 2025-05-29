@@ -11,15 +11,11 @@ function Login() {
   const [isLoading, setIsLoading] = useState(false);
   
   const navigate = useNavigate();
-  const { login, isAuthenticated } = useAuth();
-
-  // Debug: log when auth state changes
-  console.log('🔍 Login Component: Current auth state:', isAuthenticated);
+  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log('🔍 Login: Starting login process for email:', email);
 
     if (!email.includes('@')) {
       setError('Please enter a valid email address.');
@@ -28,7 +24,6 @@ function Login() {
     }
 
     try {
-      console.log('🔍 Login: Making API call to /auth/login');
       const response = await fetch('http://localhost:8000/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,32 +31,23 @@ function Login() {
       });
 
       const data = await response.json();
-      console.log('🔍 Login: API response status:', response.status);
-      console.log('🔍 Login: API response data:', data);
 
       if (response.ok) {
         if (data.access_token) {
-          console.log('🔍 Login: Token received, calling login() from context');
           login(data.access_token, email);
-          console.log('🔍 Login: Context login() called successfully');
         }
         setSuccess(true);
         setError('');
         
-        console.log('🔍 Login: Setting success state and preparing to navigate');
-        
         // Navigate to dashboard after successful login
         setTimeout(() => {
-          console.log('🔍 Login: Navigating to dashboard...');
           navigate('/dashboard');
         }, 1000);
         
       } else {
-        console.log('🔍 Login: Login failed with error:', data.detail);
         setError(data.detail || 'Login failed.');
       }
     } catch (err) {
-      console.error('🔍 Login: Network error:', err);
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
@@ -71,19 +57,6 @@ function Login() {
   return (
     <div className="login-container">
       <h1 className="login-title">WorkBridge – Login</h1>
-      
-      {/* Debug info */}
-      <div style={{ 
-        background: '#f0f0f0', 
-        padding: '10px', 
-        marginBottom: '20px', 
-        fontSize: '12px',
-        borderRadius: '5px'
-      }}>
-        <strong>Debug Info:</strong><br/>
-        Is Authenticated: {isAuthenticated ? 'YES' : 'NO'}<br/>
-        Token in localStorage: {localStorage.getItem('token') ? 'YES' : 'NO'}
-      </div>
       
       <form className="login-form" onSubmit={handleLogin}>
         <label className="login-label">Email</label>
