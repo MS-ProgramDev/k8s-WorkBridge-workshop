@@ -1,17 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import './Home.css';
 
 function Home() {
+  const { isAuthenticated, user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="home-container">
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+
   return (
     <div className="home-container">
       <h1>Welcome to WorkBridge</h1>
-      <p>Your team's communication, all in one place.</p>
-
-      <div className="buttons">
-        <Link to="/login" className="home-button">Login</Link>
-        <Link to="/register" className="home-button">Register</Link>
-      </div>
+      
+      {isAuthenticated ? (
+        // Content for authenticated users
+        <>
+          <p>Welcome back, {user?.email}!</p>
+          <p>Your team's communication, all in one place.</p>
+          
+          <div className="buttons">
+            <Link to="/dashboard" className="home-button">Go to Dashboard</Link>
+            <Link to="/feed" className="home-button">View Team Feed</Link>
+            <Link to="/profile" className="home-button">My Profile</Link>
+          </div>
+        </>
+      ) : (
+        // Content for non-authenticated users
+        <>
+          <p>Your team's communication, all in one place.</p>
+          
+          <div className="buttons">
+            <Link to="/login" className="home-button">Login</Link>
+            <Link to="/register" className="home-button">Register</Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }
