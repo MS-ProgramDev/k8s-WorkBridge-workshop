@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workbridge-backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workbridge-backend
+  template:
+    metadata:
+      labels:
+        app: workbridge-backend
+    spec:
+      containers:
+      - name: backend
+        # IMPORTANT: Replace this with the name of the image you build
+        image: shai3600/workbridge-backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        # Define environment variables for the application
+        - name: DATABASE_URL
+          value: "postgresql://postgres:password@postgres-service:5432/workbridge"
+        - name: ALLOWED_ORIGINS
+          value: "*" # <-- NEED CHANGE TO FRONTEND URL

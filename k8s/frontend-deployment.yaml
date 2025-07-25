@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workbridge-frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workbridge-frontend
+  template:
+    metadata:
+      labels:
+        app: workbridge-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: shai3600/workbridge-frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: REACT_APP_API_URL
+          value: "http://workbridge-backend-service:8000"

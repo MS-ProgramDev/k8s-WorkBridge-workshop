@@ -545,3 +545,462 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 29-05-2025 19:16:36.007 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for shai@gmail.com
 29-05-2025 19:16:36.009 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
 29-05-2025 19:16:36.011 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for shai@gmail.com
+30-05-2025 16:50:45.460 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+30-05-2025 16:50:47.733 [INFO] [chat.py:59 - send_message()] Received request to send message
+30-05-2025 16:50:47.739 [INFO] [chat.py:83 - send_message()] Message created: 13
+30-05-2025 16:50:49.799 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+30-05-2025 16:50:49.801 [INFO] [chat.py:108 - get_my_messages()] Retrieved 5 messages for user@example.com
+30-05-2025 16:50:51.840 [INFO] [chat.py:148 - create_group()] Received request to create group
+30-05-2025 16:50:51.863 [INFO] [chat.py:157 - create_group()] Group created: 3
+30-05-2025 16:50:53.928 [INFO] [chat.py:170 - join_group()] Received request to join group 3
+30-05-2025 16:50:53.930 [INFO] [chat.py:182 - join_group()] User user@example.com joined group 3
+30-05-2025 16:50:55.982 [INFO] [chat.py:59 - send_message()] Received request to send message
+30-05-2025 16:50:55.986 [INFO] [chat.py:83 - send_message()] Message created: 14
+30-05-2025 16:50:58.046 [INFO] [chat.py:195 - get_group_messages()] Received request to get messages for group 3
+30-05-2025 16:50:58.049 [INFO] [chat.py:215 - get_group_messages()] Retrieved 1 messages for group 3
+30-05-2025 16:51:14.965 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+30-05-2025 16:51:15.016 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+30-05-2025 16:51:16.837 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+30-05-2025 16:51:20.230 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+30-05-2025 16:51:20.232 [INFO] [chat.py:108 - get_my_messages()] Retrieved 5 messages for abc@gmail.com
+30-05-2025 16:51:20.234 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+30-05-2025 16:51:20.235 [INFO] [chat.py:108 - get_my_messages()] Retrieved 5 messages for abc@gmail.com
+30-05-2025 16:51:22.613 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+30-05-2025 16:51:22.613 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 4 messages between abc@gmail.com and abc123@gmail.com
+30-05-2025 16:51:23.446 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+30-05-2025 16:51:23.446 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+04-06-2025 12:59:00.661 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+04-06-2025 12:59:00.818 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+04-06-2025 12:59:07.322 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+05-06-2025 16:35:34.850 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 16:35:34.992 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 16:35:40.460 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+05-06-2025 16:35:44.176 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 16:35:44.184 [INFO] [chat.py:108 - get_my_messages()] Retrieved 5 messages for abc@gmail.com
+05-06-2025 16:35:44.192 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 16:35:44.194 [INFO] [chat.py:108 - get_my_messages()] Retrieved 5 messages for abc@gmail.com
+05-06-2025 16:35:47.336 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 16:35:47.337 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 16:35:49.165 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 16:35:49.166 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 4 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 16:35:51.351 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 16:35:51.353 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 16:35:52.123 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 16:35:52.126 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 4 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 16:36:05.240 [INFO] [chat.py:59 - send_message()] Received request to send message
+05-06-2025 16:36:05.249 [INFO] [chat.py:83 - send_message()] Message created: 15
+05-06-2025 16:36:10.605 [INFO] [auth.py:44 - login()] Login attempt for email: abc123@gmail.com
+05-06-2025 16:36:12.414 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 16:36:12.415 [INFO] [chat.py:108 - get_my_messages()] Retrieved 8 messages for abc123@gmail.com
+05-06-2025 16:36:12.417 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 16:36:12.418 [INFO] [chat.py:108 - get_my_messages()] Retrieved 8 messages for abc123@gmail.com
+05-06-2025 16:36:14.560 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc111@gmail.com
+05-06-2025 16:36:14.562 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between abc123@gmail.com and abc111@gmail.com
+05-06-2025 16:36:15.810 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 16:36:15.811 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc123@gmail.com and abc123@gmail.com
+05-06-2025 16:36:16.085 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 16:36:16.088 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc123@gmail.com and abc123@gmail.com
+05-06-2025 16:36:17.163 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 16:36:17.165 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+05-06-2025 17:47:25.246 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 17:47:25.405 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 17:47:32.478 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+05-06-2025 17:47:35.311 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 17:47:35.317 [INFO] [chat.py:108 - get_my_messages()] Retrieved 6 messages for abc@gmail.com
+05-06-2025 17:47:35.319 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 17:47:35.321 [INFO] [chat.py:108 - get_my_messages()] Retrieved 6 messages for abc@gmail.com
+05-06-2025 17:47:37.958 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 17:47:37.960 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 17:47:41.583 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 17:47:41.584 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 17:47:43.510 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 17:47:43.512 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 17:47:45.563 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 17:47:45.565 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 17:47:47.900 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 17:47:47.901 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 17:47:51.086 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 17:47:51.088 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 17:47:55.639 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 17:47:55.640 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 17:48:24.531 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 17:48:24.533 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 17:48:25.969 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 17:48:25.971 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 18:16:36.792 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:16:36.792 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+05-06-2025 18:16:36.793 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:16:36.794 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+05-06-2025 18:16:50.708 [INFO] [auth.py:24 - register()] Received registration request for email: abc1234@gmail.com
+05-06-2025 18:16:51.003 [INFO] [auth.py:36 - register()] User successfully created in database: abc1234@gmail.com
+05-06-2025 18:16:58.914 [INFO] [auth.py:44 - login()] Login attempt for email: abc1234@gmail.com
+05-06-2025 18:17:02.524 [INFO] [auth.py:44 - login()] Login attempt for email: abc1234@gmail.com
+05-06-2025 18:17:09.196 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:17:09.202 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for abc1234@gmail.com
+05-06-2025 18:17:09.203 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:17:09.205 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for abc1234@gmail.com
+05-06-2025 18:17:34.344 [INFO] [chat.py:59 - send_message()] Received request to send message
+05-06-2025 18:17:34.348 [INFO] [chat.py:83 - send_message()] Message created: 16
+05-06-2025 18:17:40.074 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+05-06-2025 18:17:42.456 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:17:42.458 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+05-06-2025 18:17:42.461 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:17:42.462 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+05-06-2025 18:17:51.050 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc1234@gmail.com
+05-06-2025 18:17:51.053 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc1234@gmail.com
+05-06-2025 18:17:52.505 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:17:52.509 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 18:17:53.584 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc1234@gmail.com
+05-06-2025 18:17:53.585 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc1234@gmail.com
+05-06-2025 18:17:54.439 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:17:54.442 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+05-06-2025 18:17:55.036 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 18:17:55.037 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+05-06-2025 18:17:55.777 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc1234@gmail.com
+05-06-2025 18:17:55.779 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc1234@gmail.com
+05-06-2025 18:18:35.131 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+05-06-2025 18:18:42.666 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:18:42.668 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+05-06-2025 18:18:42.670 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:18:42.671 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+05-06-2025 18:18:46.719 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc1234@gmail.com
+05-06-2025 18:18:46.721 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc1234@gmail.com
+05-06-2025 18:18:57.888 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:18:57.890 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+05-06-2025 18:18:57.892 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:18:57.892 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+05-06-2025 18:18:57.893 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:18:57.897 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+05-06-2025 18:18:57.900 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:18:57.901 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+05-06-2025 18:19:03.185 [INFO] [auth.py:44 - login()] Login attempt for email: abc123@gmail.com
+05-06-2025 18:19:08.254 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:08.256 [INFO] [chat.py:108 - get_my_messages()] Retrieved 8 messages for abc123@gmail.com
+05-06-2025 18:19:08.258 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:08.259 [INFO] [chat.py:108 - get_my_messages()] Retrieved 8 messages for abc123@gmail.com
+05-06-2025 18:19:10.455 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+05-06-2025 18:19:10.456 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc123@gmail.com and abc123@gmail.com
+05-06-2025 18:19:23.226 [INFO] [chat.py:59 - send_message()] Received request to send message
+05-06-2025 18:19:23.229 [INFO] [chat.py:83 - send_message()] Message created: 17
+05-06-2025 18:19:25.071 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:25.073 [INFO] [chat.py:108 - get_my_messages()] Retrieved 9 messages for abc123@gmail.com
+05-06-2025 18:19:25.075 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:25.076 [INFO] [chat.py:108 - get_my_messages()] Retrieved 9 messages for abc123@gmail.com
+05-06-2025 18:19:26.995 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:19:26.998 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+05-06-2025 18:19:31.020 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:19:31.022 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+05-06-2025 18:19:31.405 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:19:31.407 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+05-06-2025 18:19:31.605 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:19:31.607 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+05-06-2025 18:19:34.210 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:19:34.210 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+05-06-2025 18:19:34.211 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:34.213 [INFO] [chat.py:108 - get_my_messages()] Retrieved 9 messages for abc123@gmail.com
+05-06-2025 18:19:34.215 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:19:34.216 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+05-06-2025 18:19:34.219 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:34.221 [INFO] [chat.py:108 - get_my_messages()] Retrieved 9 messages for abc123@gmail.com
+05-06-2025 18:19:35.542 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:19:35.545 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+05-06-2025 18:19:42.338 [INFO] [chat.py:59 - send_message()] Received request to send message
+05-06-2025 18:19:42.341 [INFO] [chat.py:83 - send_message()] Message created: 18
+05-06-2025 18:19:44.226 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:19:44.226 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+05-06-2025 18:19:44.226 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:44.230 [INFO] [chat.py:108 - get_my_messages()] Retrieved 10 messages for abc123@gmail.com
+05-06-2025 18:19:44.231 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+05-06-2025 18:19:44.231 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+05-06-2025 18:19:44.233 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:19:44.236 [INFO] [chat.py:108 - get_my_messages()] Retrieved 10 messages for abc123@gmail.com
+05-06-2025 18:19:45.408 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+05-06-2025 18:19:45.409 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+05-06-2025 18:20:10.618 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+05-06-2025 18:20:12.897 [INFO] [chat.py:59 - send_message()] Received request to send message
+05-06-2025 18:20:12.904 [INFO] [chat.py:83 - send_message()] Message created: 19
+05-06-2025 18:20:14.959 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+05-06-2025 18:20:14.961 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for user@example.com
+05-06-2025 18:20:17.015 [INFO] [chat.py:148 - create_group()] Received request to create group
+05-06-2025 18:20:17.538 [INFO] [chat.py:157 - create_group()] Group created: 4
+05-06-2025 18:20:19.647 [INFO] [chat.py:170 - join_group()] Received request to join group 4
+05-06-2025 18:20:19.650 [INFO] [chat.py:182 - join_group()] User user@example.com joined group 4
+05-06-2025 18:20:21.698 [INFO] [chat.py:59 - send_message()] Received request to send message
+05-06-2025 18:20:21.701 [INFO] [chat.py:83 - send_message()] Message created: 20
+05-06-2025 18:20:23.749 [INFO] [chat.py:195 - get_group_messages()] Received request to get messages for group 4
+05-06-2025 18:20:23.753 [INFO] [chat.py:215 - get_group_messages()] Retrieved 1 messages for group 4
+07-06-2025 17:42:07.325 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+07-06-2025 17:42:13.129 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:13.145 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+07-06-2025 17:42:13.153 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:13.153 [INFO] [chat.py:108 - get_my_messages()] Retrieved 7 messages for abc@gmail.com
+07-06-2025 17:42:19.914 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:19.914 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: module 'jose.jwt' has no attribute 'InvalidTokenError'
+07-06-2025 17:42:19.919 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:19.919 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: module 'jose.jwt' has no attribute 'InvalidTokenError'
+07-06-2025 17:42:26.121 [INFO] [auth.py:44 - login()] Login attempt for email: abc123@gmail.com
+07-06-2025 17:42:29.323 [INFO] [auth.py:44 - login()] Login attempt for email: abc123@gmail.com
+07-06-2025 17:42:35.174 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:35.175 [INFO] [chat.py:108 - get_my_messages()] Retrieved 10 messages for abc123@gmail.com
+07-06-2025 17:42:35.180 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:35.182 [INFO] [chat.py:108 - get_my_messages()] Retrieved 10 messages for abc123@gmail.com
+07-06-2025 17:42:37.551 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+07-06-2025 17:42:37.551 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc123@gmail.com and abc@gmail.com
+07-06-2025 17:42:47.381 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+07-06-2025 17:42:47.381 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+07-06-2025 17:42:48.714 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+07-06-2025 17:42:48.714 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 5 messages between abc@gmail.com and abc123@gmail.com
+07-06-2025 17:42:51.060 [INFO] [chat.py:59 - send_message()] Received request to send message
+07-06-2025 17:42:51.076 [INFO] [chat.py:83 - send_message()] Message created: 21
+07-06-2025 17:42:53.214 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+07-06-2025 17:42:53.214 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+07-06-2025 17:42:53.214 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:53.222 [INFO] [chat.py:108 - get_my_messages()] Retrieved 8 messages for abc@gmail.com
+07-06-2025 17:42:53.222 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+07-06-2025 17:42:53.222 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+07-06-2025 17:42:53.228 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:42:53.230 [INFO] [chat.py:108 - get_my_messages()] Retrieved 8 messages for abc@gmail.com
+07-06-2025 17:42:55.090 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+07-06-2025 17:42:55.090 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+07-06-2025 17:42:55.586 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+07-06-2025 17:42:55.586 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 6 messages between abc@gmail.com and abc123@gmail.com
+07-06-2025 17:42:59.836 [INFO] [chat.py:59 - send_message()] Received request to send message
+07-06-2025 17:42:59.836 [INFO] [chat.py:83 - send_message()] Message created: 22
+07-06-2025 17:43:01.323 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:43:01.332 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc123@gmail.com
+07-06-2025 17:43:01.335 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+07-06-2025 17:43:01.339 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+07-06-2025 17:43:01.342 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+07-06-2025 17:43:01.342 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc123@gmail.com
+07-06-2025 17:43:01.342 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+07-06-2025 17:43:01.342 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+07-06-2025 17:43:03.346 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+07-06-2025 17:43:03.351 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:13:26.584 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:13:26.693 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:13:28.390 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+08-06-2025 10:13:35.527 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:13:35.541 [INFO] [chat.py:108 - get_my_messages()] Retrieved 9 messages for abc@gmail.com
+08-06-2025 10:13:35.546 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:13:35.549 [INFO] [chat.py:108 - get_my_messages()] Retrieved 9 messages for abc@gmail.com
+08-06-2025 10:13:37.141 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:13:37.141 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc@gmail.com and abc123@gmail.com
+08-06-2025 10:13:47.201 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:13:47.201 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+08-06-2025 10:13:51.227 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:13:51.230 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc@gmail.com and abc123@gmail.com
+08-06-2025 10:13:53.275 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:13:53.275 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc@gmail.com and abc123@gmail.com
+08-06-2025 10:13:53.800 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:13:53.800 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc@gmail.com and abc123@gmail.com
+08-06-2025 10:13:54.073 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:13:54.074 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 1 messages between abc@gmail.com and abc@gmail.com
+08-06-2025 10:14:05.658 [INFO] [chat.py:59 - send_message()] Received request to send message
+08-06-2025 10:14:05.658 [INFO] [chat.py:83 - send_message()] Message created: 23
+08-06-2025 10:14:09.365 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:14:09.365 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: Token has expired
+08-06-2025 10:14:09.365 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:14:09.365 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:14:09.379 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:14:09.379 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: Token has expired
+08-06-2025 10:14:16.589 [INFO] [auth.py:44 - login()] Login attempt for email: abc123@gmail.com
+08-06-2025 10:14:19.409 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:14:19.410 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc123@gmail.com
+08-06-2025 10:14:19.412 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:14:19.414 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc123@gmail.com
+08-06-2025 10:14:21.769 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:14:21.769 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:14:25.324 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:14:25.324 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:14:25.741 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:14:25.741 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:14:26.268 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:14:26.283 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:14:26.777 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:14:26.781 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 3 messages between abc123@gmail.com and abc123@gmail.com
+08-06-2025 10:14:27.395 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:14:27.406 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:14:30.060 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:14:30.061 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+08-06-2025 10:14:30.062 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:14:30.065 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc123@gmail.com
+08-06-2025 10:14:30.068 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:14:30.070 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+08-06-2025 10:14:30.071 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:14:30.074 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc123@gmail.com
+08-06-2025 10:14:31.115 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:14:31.120 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:14:57.534 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:14:57.536 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 7 messages between abc@gmail.com and abc123@gmail.com
+08-06-2025 10:15:00.966 [INFO] [chat.py:59 - send_message()] Received request to send message
+08-06-2025 10:15:00.967 [INFO] [chat.py:83 - send_message()] Message created: 24
+08-06-2025 10:15:02.911 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:15:02.913 [INFO] [chat.py:108 - get_my_messages()] Retrieved 13 messages for abc123@gmail.com
+08-06-2025 10:15:02.916 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:15:02.917 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+08-06-2025 10:15:02.919 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:15:02.922 [INFO] [chat.py:108 - get_my_messages()] Retrieved 13 messages for abc123@gmail.com
+08-06-2025 10:15:02.922 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:15:02.922 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+08-06-2025 10:15:04.354 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:15:04.357 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 3 messages between abc123@gmail.com and abc123@gmail.com
+08-06-2025 10:15:06.925 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 10:15:06.927 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 8 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 10:15:17.548 [INFO] [chat.py:59 - send_message()] Received request to send message
+08-06-2025 10:15:17.551 [INFO] [chat.py:83 - send_message()] Message created: 25
+08-06-2025 10:15:19.425 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:15:19.426 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc@gmail.com
+08-06-2025 10:15:19.428 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:15:19.429 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+08-06-2025 10:15:19.432 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:15:19.436 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc@gmail.com
+08-06-2025 10:15:19.439 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:15:19.440 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+08-06-2025 10:15:21.283 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 10:15:21.283 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 9 messages between abc@gmail.com and abc123@gmail.com
+08-06-2025 10:41:25.250 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:41:25.404 [INFO] [chat.py:108 - get_my_messages()] Retrieved 14 messages for abc123@gmail.com
+08-06-2025 10:41:25.408 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:41:25.408 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+08-06-2025 10:41:25.408 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:41:25.418 [INFO] [chat.py:108 - get_my_messages()] Retrieved 14 messages for abc123@gmail.com
+08-06-2025 10:41:25.418 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:41:25.418 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc123@gmail.com
+08-06-2025 10:41:48.140 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:41:48.140 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+08-06-2025 10:41:48.140 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 10:41:48.140 [INFO] [auth.py:74 - get_me()] Token successfully decoded for email: abc@gmail.com
+08-06-2025 10:42:03.956 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:42:03.960 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc@gmail.com
+08-06-2025 10:42:03.963 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 10:42:03.963 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc@gmail.com
+08-06-2025 11:01:07.936 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 11:01:07.951 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+08-06-2025 11:11:44.458 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 11:11:44.458 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: module 'jose.jwt' has no attribute 'InvalidTokenError'
+08-06-2025 11:11:44.463 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 11:11:44.463 [ERROR] [chat.py:43 - get_current_user()] Error decoding token: module 'jose.jwt' has no attribute 'InvalidTokenError'
+08-06-2025 11:20:53.874 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+08-06-2025 11:21:04.707 [INFO] [auth.py:44 - login()] Login attempt for email: abc@gmail.com
+08-06-2025 11:21:14.181 [INFO] [auth.py:44 - login()] Login attempt for email: abc123@gmail.com
+08-06-2025 11:21:16.111 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 11:21:16.119 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc@gmail.com
+08-06-2025 11:21:16.119 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 11:21:16.119 [INFO] [chat.py:108 - get_my_messages()] Retrieved 12 messages for abc@gmail.com
+08-06-2025 11:21:19.308 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc123@gmail.com
+08-06-2025 11:21:19.313 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 9 messages between abc@gmail.com and abc123@gmail.com
+08-06-2025 11:21:33.200 [INFO] [chat.py:59 - send_message()] Received request to send message
+08-06-2025 11:21:33.218 [INFO] [chat.py:83 - send_message()] Message created: 26
+08-06-2025 11:21:35.267 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 11:21:35.267 [INFO] [chat.py:108 - get_my_messages()] Retrieved 15 messages for abc123@gmail.com
+08-06-2025 11:21:35.267 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 11:21:35.267 [INFO] [chat.py:108 - get_my_messages()] Retrieved 15 messages for abc123@gmail.com
+08-06-2025 11:21:37.177 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user abc@gmail.com
+08-06-2025 11:21:37.180 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 10 messages between abc123@gmail.com and abc@gmail.com
+08-06-2025 11:22:30.993 [INFO] [auth.py:44 - login()] Login attempt for email: user@example.com
+08-06-2025 11:22:33.400 [INFO] [chat.py:59 - send_message()] Received request to send message
+08-06-2025 11:22:33.400 [INFO] [chat.py:83 - send_message()] Message created: 27
+08-06-2025 11:22:35.450 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+08-06-2025 11:22:35.450 [INFO] [chat.py:108 - get_my_messages()] Retrieved 9 messages for user@example.com
+08-06-2025 11:22:37.495 [INFO] [chat.py:148 - create_group()] Received request to create group
+08-06-2025 11:22:37.520 [INFO] [chat.py:157 - create_group()] Group created: 5
+08-06-2025 11:22:39.581 [INFO] [chat.py:170 - join_group()] Received request to join group 5
+08-06-2025 11:22:39.586 [INFO] [chat.py:182 - join_group()] User user@example.com joined group 5
+08-06-2025 11:22:41.644 [INFO] [chat.py:59 - send_message()] Received request to send message
+08-06-2025 11:22:41.652 [INFO] [chat.py:83 - send_message()] Message created: 28
+08-06-2025 11:22:43.707 [INFO] [chat.py:195 - get_group_messages()] Received request to get messages for group 5
+08-06-2025 11:22:43.707 [INFO] [chat.py:215 - get_group_messages()] Retrieved 1 messages for group 5
+25-07-2025 15:18:26.839 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+25-07-2025 15:18:27.130 [INFO] [auth.py:64 - get_me()] Accessing /me endpoint
+25-07-2025 15:18:42.960 [INFO] [auth.py:24 - register()] Received registration request for email: Shai123@gmail.com
+25-07-2025 15:18:43.702 [INFO] [auth.py:36 - register()] User successfully created in database: Shai123@gmail.com
+25-07-2025 15:18:55.110 [INFO] [auth.py:44 - login()] Login attempt for email: Shai123@gmail.com
+25-07-2025 15:18:58.474 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:18:58.483 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai123@gmail.com
+25-07-2025 15:18:58.487 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:18:58.489 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai123@gmail.com
+25-07-2025 15:19:33.718 [INFO] [auth.py:24 - register()] Received registration request for email: Shai124@gmail.com
+25-07-2025 15:19:33.973 [INFO] [auth.py:36 - register()] User successfully created in database: Shai124@gmail.com
+25-07-2025 15:19:43.399 [INFO] [auth.py:44 - login()] Login attempt for email: Shai124@gmail.com
+25-07-2025 15:19:45.380 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:19:45.383 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai124@gmail.com
+25-07-2025 15:19:45.385 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:19:45.386 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai124@gmail.com
+25-07-2025 15:19:55.129 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:19:55.129 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 0 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:19:57.529 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-07-2025 15:19:57.541 [INFO] [chat.py:83 - send_message()] Message created: 29
+25-07-2025 15:20:00.159 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-07-2025 15:20:00.162 [INFO] [chat.py:83 - send_message()] Message created: 30
+25-07-2025 15:20:09.249 [INFO] [auth.py:44 - login()] Login attempt for email: Shai123@gmail.com
+25-07-2025 15:20:10.982 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:20:10.985 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai123@gmail.com
+25-07-2025 15:20:10.986 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:20:10.988 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai123@gmail.com
+25-07-2025 15:20:20.629 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai124@gmail.com
+25-07-2025 15:20:20.633 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 0 messages between Shai123@gmail.com and Shai124@gmail.com
+25-07-2025 15:20:21.647 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai124@gmail.com
+25-07-2025 15:20:21.649 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 0 messages between Shai123@gmail.com and Shai124@gmail.com
+25-07-2025 15:20:21.801 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai124@gmail.com
+25-07-2025 15:20:21.803 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 0 messages between Shai123@gmail.com and Shai124@gmail.com
+25-07-2025 15:20:23.391 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:20:23.393 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai123@gmail.com
+25-07-2025 15:20:23.397 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:20:23.398 [INFO] [chat.py:108 - get_my_messages()] Retrieved 0 messages for Shai123@gmail.com
+25-07-2025 15:20:49.745 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-07-2025 15:20:49.752 [INFO] [chat.py:83 - send_message()] Message created: 31
+25-07-2025 15:20:51.989 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-07-2025 15:20:51.992 [INFO] [chat.py:83 - send_message()] Message created: 32
+25-07-2025 15:21:06.145 [INFO] [auth.py:44 - login()] Login attempt for email: Shai124@gmail.com
+25-07-2025 15:21:07.819 [INFO] [auth.py:44 - login()] Login attempt for email: Shai124@gmail.com
+25-07-2025 15:21:09.723 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:21:09.726 [INFO] [chat.py:108 - get_my_messages()] Retrieved 4 messages for Shai124@gmail.com
+25-07-2025 15:21:09.730 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:21:09.731 [INFO] [chat.py:108 - get_my_messages()] Retrieved 4 messages for Shai124@gmail.com
+25-07-2025 15:21:10.708 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmail.com
+25-07-2025 15:21:10.709 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmail.com
+25-07-2025 15:21:11.313 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:11.317 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:12.073 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmail.com
+25-07-2025 15:21:12.076 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmail.com
+25-07-2025 15:21:12.605 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:12.613 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:13.029 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:13.030 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:13.453 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmail.com
+25-07-2025 15:21:13.462 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmail.com
+25-07-2025 15:21:14.123 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:14.133 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:16.869 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:16.871 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:17.548 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmail.com
+25-07-2025 15:21:17.550 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmail.com
+25-07-2025 15:21:18.667 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:18.670 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:23.997 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:24.000 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:24.304 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:24.310 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:24.614 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:24.623 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:24.757 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:24.759 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:25.764 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:25.764 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:26.044 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:26.048 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:26.261 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:26.264 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:26.395 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmai.com
+25-07-2025 15:21:26.399 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmai.com
+25-07-2025 15:21:29.595 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai123@gmail.com
+25-07-2025 15:21:29.598 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 2 messages between Shai124@gmail.com and Shai123@gmail.com
+25-07-2025 15:21:31.466 [INFO] [chat.py:59 - send_message()] Received request to send message
+25-07-2025 15:21:31.466 [INFO] [chat.py:83 - send_message()] Message created: 33
+25-07-2025 15:21:39.881 [INFO] [auth.py:44 - login()] Login attempt for email: Shai123@gmail.com
+25-07-2025 15:21:42.492 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:21:42.494 [INFO] [chat.py:108 - get_my_messages()] Retrieved 3 messages for Shai123@gmail.com
+25-07-2025 15:21:42.497 [INFO] [chat.py:104 - get_my_messages()] Received request to get messages
+25-07-2025 15:21:42.498 [INFO] [chat.py:108 - get_my_messages()] Retrieved 3 messages for Shai123@gmail.com
+25-07-2025 15:21:43.468 [INFO] [chat.py:122 - get_messages_with_user()] Received request to get messages with user Shai124@gmail.com
+25-07-2025 15:21:43.470 [INFO] [chat.py:135 - get_messages_with_user()] Retrieved 3 messages between Shai123@gmail.com and Shai124@gmail.com

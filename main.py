@@ -10,6 +10,7 @@ from fastapi.security import HTTPBearer
 from fastapi.openapi.utils import get_openapi
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.models import APIKey, APIKeyIn, SecuritySchemeType
+import os
 
 
 
@@ -20,9 +21,13 @@ app = FastAPI(
 )
 
 
+# Get the allowed origins from an environment variable.
+# Default to "http://localhost:3000" if the variable is not set.
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
