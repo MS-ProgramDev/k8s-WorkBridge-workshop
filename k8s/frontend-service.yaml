@@ -6,8 +6,15 @@ spec:
   selector:
     app: workbridge-frontend
   # This makes the service accessible from outside the cluster
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
-      port: 80 # The port clients will connect to
-      targetPort: 80 # The port the container is running on
+      port: 80       # The port inside the cluster
+      targetPort: 80 # The port on the pod
+      # The static port to access from outside
+      nodePort: 30007
+  # type: LoadBalancer
+  # ports:
+  #   - protocol: TCP
+  #     port: 80 # The port clients will connect to
+  #     targetPort: 80 # The port the container is running on
