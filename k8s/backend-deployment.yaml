@@ -19,8 +19,7 @@ spec:
         ports:
         - containerPort: 8000
         env:
-        # Define environment variables for the application
         - name: DATABASE_URL
-          value: "postgresql://postgres:password@postgres-service:5432/workbridge"
+          value: "postgresql://postgres:postgres@postgres-service:5432/workbridgedb"
         - name: ALLOWED_ORIGINS
-          value: "*" # <-- NEED CHANGE TO FRONTEND URL
+          value: "http://localhost:30007"

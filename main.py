@@ -23,11 +23,9 @@ app = FastAPI(
 
 # Get the allowed origins from an environment variable.
 # Default to "http://localhost:3000" if the variable is not set.
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=["http://localhost:30007"], # Hardcode the exact frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

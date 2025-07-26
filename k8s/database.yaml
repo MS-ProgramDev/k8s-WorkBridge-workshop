@@ -5,9 +5,9 @@ metadata:
   name: postgres-secret
 type: Opaque
 stringData:
-  POSTGRES_PASSWORD: "your-strong-password" # <-- CHANGE THIS!
-  POSTGRES_USER: "workbridgeuser"
-  POSTGRES_DB: "workbridgedb"
+  POSTGRES_PASSWORD: "postgres"
+  POSTGRES_USER: "postgres"
+  POSTGRES_DB: "workbridge"
 
 ---
 # Service to provide a stable network address for the database

@@ -29,7 +29,9 @@ function Register() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/auth/register', {
+        //const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+      //"http://localhost:30008"
+        const response = await fetch('http://localhost:30008/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

@@ -24,8 +24,8 @@ function Login() {
     }
 
     try {
-       const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-       const response = await fetch(`${API_URL}/auth/login`, {
+        const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

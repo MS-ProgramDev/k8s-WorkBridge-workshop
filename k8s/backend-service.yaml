@@ -5,7 +5,10 @@ metadata:
 spec:
   selector:
     app: workbridge-backend
+  type: NodePort
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+      # Assign a static port for easy access
+      nodePort: 30008
