@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: backend
-        # IMPORTANT: Replace this with the name of the image you build
         image: shai3600/workbridge-backend:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
         env:
         - name: DATABASE_URL
-          value: "postgresql://postgres:postgres@postgres-service:5432/workbridgedb"
+          value: "postgresql://workbridgeuser:your-strong-password@postgres-service:5432/workbridgedb"
         - name: ALLOWED_ORIGINS
           value: "http://localhost:30007"
