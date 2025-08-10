@@ -1,15 +1,26 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+# Build the database URL from separate env variables
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_NAME = os.getenv("DB_NAME")
 
 
 
-# Database connection URL – change after you download postgress
-""" format: "postgresql://<user>:<password>@<host>:<port>/<database>" """
+# Database connection URL
+#""" format: "postgresql://<user>:<password>@<host>:<port>/<database>" """
 #DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/workbridge"
-DATABASE_URL = "postgresql://workbridgeuser:your-strong-password@postgres-service:5432/workbridgedb"
+DATABASE_URL = "postgresql://DB_USER:DB_PASSWORD@DB_HOST:DB_PORT/DB_NAME"
 
 print(f"Attempting to connect to database at: {DATABASE_URL}")
-
 
 
 # Create SQLAlchemy engine

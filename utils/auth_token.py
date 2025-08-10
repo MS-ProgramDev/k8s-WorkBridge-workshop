@@ -21,9 +21,19 @@ from datetime import datetime, timedelta, UTC
 from utils.db_user import get_user_by_email_db
 import logging
 from db.database import SessionLocal
+import os
+from dotenv import load_dotenv
 
-SECRET_KEY = "MTA"
-ALGORITHM = "HS256"
+
+
+
+# Load environment variables from .env
+load_dotenv()
+
+# Build the database URL from separate env variables
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+JWT_ALGORITHM = os.getenv("JWT_ALGORITHM")
+
 
 logger = logging.getLogger(__name__)
 oauth3_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
@@ -39,12 +49,12 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
     to_encode = data.copy()
     expire = datetime.now(UTC) + expires_delta
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
     return encoded_jwt
 
 def decode_access_token(token: str):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
         return payload
     except jwt.ExpiredSignatureError:
         raise Exception("Token has expired")
@@ -55,7 +65,7 @@ def decode_access_token(token: str):
 def get_current_user(token: str = Depends(oauth3_scheme), db: Session = Depends(get_db)) -> User:
     logger.info("Trying to decode token: %s", token)
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
         email: str = payload.get("sub")
         if email is None:
             raise HTTPException(status_code=401, detail="Invalid token")
