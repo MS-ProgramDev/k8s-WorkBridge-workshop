@@ -18,7 +18,7 @@ DB_NAME = os.getenv("DB_NAME")
 # Database connection URL
 #""" format: "postgresql://<user>:<password>@<host>:<port>/<database>" """
 #DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/workbridge"
-DATABASE_URL = "postgresql://DB_USER:DB_PASSWORD@DB_HOST:DB_PORT/DB_NAME"
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 print(f"Attempting to connect to database at: {DATABASE_URL}")
 
