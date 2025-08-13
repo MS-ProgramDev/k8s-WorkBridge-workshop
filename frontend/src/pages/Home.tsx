@@ -25,8 +25,7 @@ function Home() {
           <p>Your team's communication, all in one place.</p>
           
           <div className="buttons">
-            <Link to="/dashboard" className="home-button">Go to Dashboard</Link>
-            <Link to="/feed" className="home-button">View Team Feed</Link>
+            <Link to="/feed" className="home-button">View Feed</Link>
             <Link to="/chat" className="home-button">Open Chat</Link>
             <Link to="/profile" className="home-button">My Profile</Link>
           </div>

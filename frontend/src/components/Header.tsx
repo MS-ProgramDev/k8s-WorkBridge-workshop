@@ -38,7 +38,6 @@ const Header = () => {
         {isAuthenticated ? (
           // Authenticated user navigation
           <>
-            <Link to="/dashboard" className="nav-link">Dashboard</Link>
             <Link to="/feed" className="nav-link">Feed</Link>
             <Link to="/chat" className="nav-link">Chat</Link>
             <Link to="/profile" className="nav-link">Profile</Link>
