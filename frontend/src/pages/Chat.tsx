@@ -270,7 +270,7 @@ const Chat: React.FC = () => {
             >
               <div className="conversation-info">
                 <div className="conversation-name">
-                  {conversation.type === 'group' ? '👥 ' : '👤 '}
+                  {conversation.type === 'group' ? '則 ' : '側 '}
                   {conversation.name}
                 </div>
                 {conversation.lastMessage && (
@@ -297,7 +297,7 @@ const Chat: React.FC = () => {
             {/* Chat Header */}
             <div className="chat-main-header">
               <h3>
-                {selectedConversation.type === 'group' ? '👥 ' : '👤 '}
+                {selectedConversation.type === 'group' ? '則 ' : '側 '}
                 {selectedConversation.name}
               </h3>
             </div>
@@ -346,7 +346,7 @@ const Chat: React.FC = () => {
       {error && (
         <div className="error-message">
           {error}
-          <button onClick={() => setError('')}>×</button>
+          <button onClick={() => setError('')}>ﾃ</button>
         </div>
       )}
     </div>
