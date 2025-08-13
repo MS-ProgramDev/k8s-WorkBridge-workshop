@@ -118,16 +118,31 @@ const Chat: React.FC = () => {
   };
 
   const startNewChat = async () => {
-    if (!newChatEmail.trim()) return;
+    // Basic validation to ensure the input is not empty or the user's own email
+    if (!newChatEmail.trim() || newChatEmail.trim().toLowerCase() === user?.email.toLowerCase()) {
+      setError("Please enter another user's email address.");
+      return;
+    }
+
+    setLoading(true);
+    setError(''); // Clear previous errors
 
     try {
-      // Check if conversation already exists
+      // Call the backend to verify the user exists
+      const { exists } = await chatApi.checkUserExists(newChatEmail);
+
+      if (!exists) {
+        setError('This user does not exist. Please check the email address.');
+        setLoading(false);
+        return; // Stop the function if the user is not found
+      }
+
+      // If the user exists, proceed with creating the chat
       const existingConv = conversations.find(conv => conv.id === newChatEmail);
       if (existingConv) {
         setSelectedConversation(existingConv);
         loadMessages(existingConv);
       } else {
-        // Create new conversation entry
         const newConv: Conversation = {
           id: newChatEmail,
           name: newChatEmail,
@@ -140,8 +155,12 @@ const Chat: React.FC = () => {
 
       setNewChatEmail('');
       setShowNewChat(false);
+
     } catch (err) {
-      setError('Failed to start new chat');
+      setError('An error occurred while trying to start the chat.');
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 

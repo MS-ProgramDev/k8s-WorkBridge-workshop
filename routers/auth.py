@@ -75,3 +75,13 @@ async def get_me(authorization: str = Header(...)):
 
     return {"email": payload["sub"]}
 
+
+
+@router.get("/users/exists/{email}")
+async def check_user_exists(email: str, db: Session = Depends(get_db)):
+    """
+    Check if a user with the given email address exists in the database.
+    """
+    logger.info(f"Checking if user exists: {email}")
+    user_exists = user_exists_db(db, email)
+    return {"exists": user_exists}
