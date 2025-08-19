@@ -11,6 +11,7 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.models import APIKey, APIKeyIn, SecuritySchemeType
 import os
+from dotenv import load_dotenv
 
 
 
@@ -21,11 +22,15 @@ app = FastAPI(
 )
 
 
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+ALLOWED_ORIGINS = [o.strip() for o in ALLOWED_ORIGINS if o.strip()]
+
+
 # Get the allowed origins from an environment variable.
 # Default to "http://localhost:3000" if the variable is not set.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:30007"], # Hardcode the exact frontend URL
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -70,5 +75,19 @@ async def root():
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
+@app.get("/healthz")
+def healthz():
+    return {"status": "ok"}
+
+@app.get("/readzy")
+def readyz():
+    # need to add timeout with db check connection
+    return {"ready": True}
+
+
+load_dotenv()
+
+PORT = int(os.getenv("PORT", "8000"))
+
 if __name__ == '__main__':
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)

@@ -1,6 +1,7 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import os
+import sys
 
 os.makedirs("logs", exist_ok=True)
 
