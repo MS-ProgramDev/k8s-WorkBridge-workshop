@@ -1,4 +1,5 @@
 // utils/chatApi.ts
+import { API_BASE } from "../config";
 
 // Helper function to get auth headers
 const getAuthHeaders = () => {
@@ -39,7 +40,7 @@ export interface GroupCreate {
 export const chatApi = {
   // Send a message (direct or group)
   sendMessage: async (messageData: MessageCreate): Promise<Message> => {
-    const response = await fetch(`http://localhost:30008/chat/messages/`, {
+    const response = await fetch(`${API_BASE}/chat/messages/`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(messageData)
@@ -55,7 +56,7 @@ export const chatApi = {
 
   // Get all messages for current user
   getMyMessages: async (): Promise<Message[]> => {
-    const response = await fetch(`http://localhost:30008/chat/messages/`, {
+    const response = await fetch(`${API_BASE}/chat/messages/`, {
       method: 'GET',
       headers: getAuthHeaders()
     });
@@ -69,7 +70,7 @@ export const chatApi = {
 
   // Get messages between current user and specific user
   getMessagesWithUser: async (userId: string): Promise<Message[]> => {
-    const response = await fetch(`http://localhost:30008/chat/messages/${userId}`, {
+    const response = await fetch(`${API_BASE}/chat/messages/${userId}`, {
       method: 'GET',
       headers: getAuthHeaders()
     });
@@ -83,7 +84,7 @@ export const chatApi = {
 
   // Create a new group
   createGroup: async (groupData: GroupCreate): Promise<Group> => {
-    const response = await fetch(`http://localhost:30008/chat/groups/`, {
+    const response = await fetch(`${API_BASE}/chat/groups/`, {
       method: 'POST',
       headers: getAuthHeaders(),
       body: JSON.stringify(groupData)
@@ -99,7 +100,7 @@ export const chatApi = {
 
   // Join a group
   joinGroup: async (groupId: number): Promise<{message: string}> => {
-    const response = await fetch(`http://localhost:30008/chat/groups/${groupId}/join`, {
+    const response = await fetch(`${API_BASE}/chat/groups/${groupId}/join`, {
       method: 'POST',
       headers: getAuthHeaders()
     });
@@ -114,7 +115,7 @@ export const chatApi = {
 
   // Get messages for a specific group
   getGroupMessages: async (groupId: number): Promise<Message[]> => {
-    const response = await fetch(`http://localhost:30008/chat/groups/${groupId}/messages`, {
+    const response = await fetch(`${API_BASE}/chat/groups/${groupId}/messages`, {
       method: 'GET',
       headers: getAuthHeaders()
     });
