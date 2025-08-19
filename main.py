@@ -1,3 +1,4 @@
+import logging
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel, EmailStr
@@ -11,9 +12,16 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.models import APIKey, APIKeyIn, SecuritySchemeType
 import os
+import signal
+import asyncio
 from dotenv import load_dotenv
+from contextlib import asynccontextmanager
+
+load_dotenv()
 
 
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="WorkBridge API",
@@ -21,7 +29,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
-
+# CROS from ENV
 ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
 ALLOWED_ORIGINS = [o.strip() for o in ALLOWED_ORIGINS if o.strip()]
 
@@ -36,7 +44,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include routers
+# Routers
 app.include_router(post_routes.router)
 app.include_router(auth_routes.router, prefix="/auth", tags=["auth"])
 app.include_router(chat_routes.router, prefix="/chat", tags=["chat"])
@@ -79,15 +87,28 @@ async def say_hello(name: str):
 def healthz():
     return {"status": "ok"}
 
-@app.get("/readzy")
+@app.get("/readyz")
 def readyz():
     # need to add timeout with db check connection
     return {"ready": True}
 
 
-load_dotenv()
-
+# PORT FROM ENV
 PORT = int(os.getenv("PORT", "8000"))
 
 if __name__ == '__main__':
     uvicorn.run(app, host="0.0.0.0", port=PORT)
+
+
+"""# Graceful shutdown (SIGTERM)- need to complete
+
+def handle_sigterm(*_):
+    logger.info("SIGTERM received → starting graceful shutdown…")
+    _shutdown_event.set()
+
+
+async def close_resources():
+    logger.info("Closing resources (DB/Redis/others)…")
+"""
+
+
