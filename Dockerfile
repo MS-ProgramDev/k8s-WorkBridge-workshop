@@ -1,21 +1,32 @@
-# Use an official Python 3.9 slim image as a base
+# Backend Dockerfile
 FROM python:3.11-slim
 
-# Set the working directory inside the container to /app
+# Prevent Python from writing .pyc files and enable unbuffered logs
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file into the container at /app
-COPY requirements.txt .
+# (Optional) Install system dependencies if needed for building native extensions
+# RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
 
-# Install the Python dependencies
+# Copy requirements and install dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of your application's code into the container at /app
+# Copy application source code
 COPY . .
 
-# Expose port 8000 to allow communication to the uvicorn server
+# Create non-root user and set permissions
+RUN useradd -r -u 10001 appuser && chown -R appuser:appuser /app
+USER appuser
+
+# Expose the default application port
 EXPOSE 8000
 
-# Command to run the application when the container starts
-# Binds the server to all network interfaces on port 8000
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Default port environment variable (overridable at runtime)
+ENV PORT=8000
+
+# Start the FastAPI application with Uvicorn
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT}"]

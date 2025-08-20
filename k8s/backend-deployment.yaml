@@ -1,25 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: workbridge-backend-deployment
+  name: backend
+  namespace: workbridge
 spec:
-  replicas: 2
+  replicas: 1                      
   selector:
     matchLabels:
-      app: workbridge-backend
+      app: backend
   template:
     metadata:
       labels:
-        app: workbridge-backend
+        app: backend
     spec:
       containers:
-      - name: backend
-        image: shai3600/workbridge-backend:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8000
-        env:
-        - name: DATABASE_URL
-          value: "postgresql://workbridgeuser:your-strong-password@postgres-service:5432/workbridgedb"
-        - name: ALLOWED_ORIGINS
-          value: "http://localhost:30007"
+        - name: backend
+          image: workbridge-backend:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: PORT
+              value: "8000"
+            - name: ALLOWED_ORIGINS
+              value: "http://workbridge.local"   
+            - name: LOG_LEVEL
+              value: "INFO"
+            - name: LOG_TO_FILE
+              value: "false"
+          envFrom:
+            - secretRef:
+                name: db-credentials          

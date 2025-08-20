@@ -1,18 +1,18 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: db-migration-job
+  name: db-migration
+  namespace: workbridge
 spec:
+  backoffLimit: 1
   template:
     spec:
+      restartPolicy: Never
       containers:
-      - name: db-migrator
-        # IMPORTANT: Use the same image as your backend deployment
-        image: shai3600/workbridge-backend:latest
-        command: ["python", "create_db_table.py"]
-        env:
-        # This must match the database URL from the deployment
-        - name: DATABASE_URL
-          value: "postgresql://postgres:postgres@postgres-service:5432/workbridge"
-      restartPolicy: OnFailure # Rerun the job if it fails
-  backoffLimit: 4
+        - name: migrate
+          image: workbridge-backend:local
+          imagePullPolicy: IfNotPresent
+          command: ["python", "/app/create_db_table.py"]
+          envFrom:
+            - secretRef:
+                name: db-credentials
