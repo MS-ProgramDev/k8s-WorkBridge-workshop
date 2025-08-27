@@ -1,5 +1,5 @@
 """
-create_tables.py
+create_db_table.py
 
 This script initializes the database by creating all the necessary tables
 based on the ORM models defined in the project.

@@ -7,13 +7,13 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
+    # Required at signup
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
-
-    # New fields
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
 
+    # Optional – edited in Profile page
     avatar_url = Column(Text, nullable=True)
     bio = Column(String(280), nullable=True)
     job_title = Column(String(100), nullable=True)
