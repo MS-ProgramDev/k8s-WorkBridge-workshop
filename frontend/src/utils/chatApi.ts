@@ -130,7 +130,7 @@ export const chatApi = {
 
   // ADD THIS FUNCTION
   checkUserExists: async (email: string): Promise<{ exists: boolean }> => {
-    const response = await fetch(`http://localhost:30008/auth/users/exists/${email}`, {
+    const response = await fetch(`${API_BASE}/auth/users/exists/${email}`, {
       method: 'GET',
       headers: getAuthHeaders()
     });
