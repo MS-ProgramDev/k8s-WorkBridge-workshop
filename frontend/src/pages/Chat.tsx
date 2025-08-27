@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { chatApi, Message, Group } from '../utils/chatApi';
+import { chatApi, Message } from '../utils/chatApi';
 import './Chat.css';
 
 interface Conversation {
   id: string;
   name: string;
-  type: 'user' | 'group';
+  type: 'user'; // Type is now always 'user'
   lastMessage?: string;
   lastMessageTime?: string;
 }
@@ -19,13 +19,10 @@ const Chat: React.FC = () => {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
   // For creating new conversations
   const [showNewChat, setShowNewChat] = useState(false);
   const [newChatEmail, setNewChatEmail] = useState('');
-  const [showNewGroup, setShowNewGroup] = useState(false);
-  const [newGroupName, setNewGroupName] = useState('');
-  const [joinGroupId, setJoinGroupId] = useState('');
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -47,19 +44,19 @@ const Chat: React.FC = () => {
     try {
       setLoading(true);
       const allMessages = await chatApi.getMyMessages();
-      
-      // Extract unique conversations from messages
+
+      // Extract unique user conversations from messages
       const conversationMap = new Map<string, Conversation>();
-      
+
       allMessages.forEach(message => {
+        // We only process direct messages, ignoring groups
         if (!message.is_group) {
-          // Direct message conversation
           const otherUser = message.sender_id === user?.email ? message.recipient_id : message.sender_id;
           if (!conversationMap.has(otherUser)) {
             conversationMap.set(otherUser, {
               id: otherUser,
               name: otherUser,
-              type: 'user',
+              type: 'user', // Always a user conversation
               lastMessage: message.content,
               lastMessageTime: message.timestamp
             });
@@ -79,13 +76,8 @@ const Chat: React.FC = () => {
   const loadMessages = async (conversation: Conversation) => {
     try {
       setLoading(true);
-      let messagesData: Message[];
-
-      if (conversation.type === 'user') {
-        messagesData = await chatApi.getMessagesWithUser(conversation.id);
-      } else {
-        messagesData = await chatApi.getGroupMessages(parseInt(conversation.id));
-      }
+      // Now we only need to get messages for a user
+      const messagesData = await chatApi.getMessagesWithUser(conversation.id);
 
       setMessages(messagesData);
       setSelectedConversation(conversation);
@@ -104,17 +96,17 @@ const Chat: React.FC = () => {
       const messageData = {
         recipient_id: selectedConversation.id,
         content: newMessage.trim(),
-        is_group: selectedConversation.type === 'group'
+        is_group: false // This is now always false
       };
 
       const sentMessage = await chatApi.sendMessage(messageData);
       setMessages(prev => [...prev, sentMessage]);
       setNewMessage('');
-      
+
       // Update conversation last message
-      setConversations(prev => 
-        prev.map(conv => 
-          conv.id === selectedConversation.id 
+      setConversations(prev =>
+        prev.map(conv =>
+          conv.id === selectedConversation.id
             ? { ...conv, lastMessage: sentMessage.content, lastMessageTime: sentMessage.timestamp }
             : conv
         )
@@ -126,16 +118,31 @@ const Chat: React.FC = () => {
   };
 
   const startNewChat = async () => {
-    if (!newChatEmail.trim()) return;
+    // Basic validation to ensure the input is not empty or the user's own email
+    if (!newChatEmail.trim() || newChatEmail.trim().toLowerCase() === user?.email.toLowerCase()) {
+      setError("Please enter another user's email address.");
+      return;
+    }
+
+    setLoading(true);
+    setError(''); // Clear previous errors
 
     try {
-      // Check if conversation already exists
+      // Call the backend to verify the user exists
+      const { exists } = await chatApi.checkUserExists(newChatEmail);
+
+      if (!exists) {
+        setError('This user does not exist. Please check the email address.');
+        setLoading(false);
+        return; // Stop the function if the user is not found
+      }
+
+      // If the user exists, proceed with creating the chat
       const existingConv = conversations.find(conv => conv.id === newChatEmail);
       if (existingConv) {
         setSelectedConversation(existingConv);
         loadMessages(existingConv);
       } else {
-        // Create new conversation entry
         const newConv: Conversation = {
           id: newChatEmail,
           name: newChatEmail,
@@ -145,52 +152,15 @@ const Chat: React.FC = () => {
         setSelectedConversation(newConv);
         setMessages([]);
       }
-      
+
       setNewChatEmail('');
       setShowNewChat(false);
+
     } catch (err) {
-      setError('Failed to start new chat');
-    }
-  };
-
-  const createGroup = async () => {
-    if (!newGroupName.trim()) return;
-
-    try {
-      const group = await chatApi.createGroup({ name: newGroupName });
-      const newConv: Conversation = {
-        id: group.id.toString(),
-        name: group.name,
-        type: 'group'
-      };
-      
-      setConversations(prev => [...prev, newConv]);
-      setNewGroupName('');
-      setShowNewGroup(false);
-    } catch (err) {
-      setError('Failed to create group');
-      console.error('Error creating group:', err);
-    }
-  };
-
-  const joinGroup = async () => {
-    if (!joinGroupId.trim()) return;
-
-    try {
-      await chatApi.joinGroup(parseInt(joinGroupId));
-      
-      // Add group to conversations (you might want to fetch group details)
-      const newConv: Conversation = {
-        id: joinGroupId,
-        name: `Group ${joinGroupId}`,
-        type: 'group'
-      };
-      
-      setConversations(prev => [...prev, newConv]);
-      setJoinGroupId('');
-    } catch (err) {
-      setError('Failed to join group');
-      console.error('Error joining group:', err);
+      setError('An error occurred while trying to start the chat.');
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -205,12 +175,10 @@ const Chat: React.FC = () => {
         <div className="chat-header">
           <h2>Messages</h2>
           <div className="chat-actions">
-            <button onClick={() => setShowNewChat(true)} className="btn-new-chat">
+            <button onClick={() => setShowNewChat(!showNewChat)} className="btn-new-chat">
               New Chat
             </button>
-            <button onClick={() => setShowNewGroup(true)} className="btn-new-group">
-              New Group
-            </button>
+            {/* "New Group" button removed */}
           </div>
         </div>
 
@@ -231,34 +199,7 @@ const Chat: React.FC = () => {
           </div>
         )}
 
-        {/* New Group Form */}
-        {showNewGroup && (
-          <div className="new-chat-form">
-            <input
-              type="text"
-              placeholder="Group name"
-              value={newGroupName}
-              onChange={(e) => setNewGroupName(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && createGroup()}
-            />
-            <div className="form-actions">
-              <button onClick={createGroup}>Create Group</button>
-              <button onClick={() => setShowNewGroup(false)}>Cancel</button>
-            </div>
-          </div>
-        )}
-
-        {/* Join Group Form */}
-        <div className="join-group-form">
-          <input
-            type="number"
-            placeholder="Group ID to join"
-            value={joinGroupId}
-            onChange={(e) => setJoinGroupId(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && joinGroup()}
-          />
-          <button onClick={joinGroup}>Join</button>
-        </div>
+        {/* "Join Group" form removed */}
 
         {/* Conversations List */}
         <div className="conversations-list">
@@ -270,7 +211,6 @@ const Chat: React.FC = () => {
             >
               <div className="conversation-info">
                 <div className="conversation-name">
-                  {conversation.type === 'group' ? '👥 ' : '👤 '}
                   {conversation.name}
                 </div>
                 {conversation.lastMessage && (
@@ -297,7 +237,6 @@ const Chat: React.FC = () => {
             {/* Chat Header */}
             <div className="chat-main-header">
               <h3>
-                {selectedConversation.type === 'group' ? '👥 ' : '👤 '}
                 {selectedConversation.name}
               </h3>
             </div>
@@ -337,7 +276,7 @@ const Chat: React.FC = () => {
         ) : (
           <div className="chat-placeholder">
             <h3>Select a conversation to start chatting</h3>
-            <p>Choose from your existing conversations or start a new one</p>
+            <p>Choose from your existing conversations or start a new one.</p>
           </div>
         )}
       </div>
@@ -346,7 +285,7 @@ const Chat: React.FC = () => {
       {error && (
         <div className="error-message">
           {error}
-          <button onClick={() => setError('')}>×</button>
+          <button onClick={() => setError('')}>x</button>
         </div>
       )}
     </div>

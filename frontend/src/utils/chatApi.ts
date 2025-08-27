@@ -126,5 +126,20 @@ export const chatApi = {
     }
 
     return response.json();
+  },
+
+  // ADD THIS FUNCTION
+  checkUserExists: async (email: string): Promise<{ exists: boolean }> => {
+    const response = await fetch(`http://localhost:30008/auth/users/exists/${email}`, {
+      method: 'GET',
+      headers: getAuthHeaders()
+    });
+
+    if (!response.ok) {
+      console.error("Failed to check user existence, status:", response.status);
+      throw new Error('Failed to verify user existence.');
+    }
+
+    return response.json();
   }
 };

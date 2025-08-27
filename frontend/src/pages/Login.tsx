@@ -10,7 +10,7 @@ function Login() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -39,12 +39,12 @@ function Login() {
         }
         setSuccess(true);
         setError('');
-        
-        // Navigate to dashboard after successful login
+
+        // Navigate to FEED after successful login
         setTimeout(() => {
-          navigate('/dashboard');
+          navigate('/feed');
         }, 1000);
-        
+
       } else {
         setError(data.detail || 'Login failed.');
       }
@@ -58,7 +58,7 @@ function Login() {
   return (
     <div className="login-container">
       <h1 className="login-title">WorkBridge – Login</h1>
-      
+
       <form className="login-form" onSubmit={handleLogin}>
         <label className="login-label">Email</label>
         <input
@@ -76,8 +76,8 @@ function Login() {
           onChange={e => setPassword(e.target.value)}
           disabled={isLoading}
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="login-button"
           disabled={isLoading}
         >
@@ -87,7 +87,7 @@ function Login() {
 
       {success && (
         <p style={{ color: 'green', marginTop: '15px' }}>
-          ✅ Logged in successfully! Redirecting to dashboard...
+          ✅ Logged in successfully! Redirecting to the feed...
         </p>
       )}
       {error && (
