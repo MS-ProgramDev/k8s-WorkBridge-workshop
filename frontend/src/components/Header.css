@@ -29,7 +29,7 @@
 .header__left { justify-content: flex-start; }
 .header__right { justify-content: flex-end; gap: 12px; position: relative; }
 
-.logo-link {
+.brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -37,10 +37,17 @@
   text-decoration: none;
   font-weight: 800;
 }
-.logo-link:visited { color: var(--nav-text); }
-.logo-link:hover { text-decoration: none; opacity: .9; }
-.logo { height: 30px; width: auto; border-radius: 4px; display: block; }
-.brand { letter-spacing: .2px; color: inherit; }
+.logo { height: 30px; width: auto; border-radius: 4px; }
+.brand span { letter-spacing: .2px; }
+
+/* nav + search area */
+.nav-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex: 1;
+}
 
 .nav {
   display: flex;
@@ -49,7 +56,7 @@
   gap: 20px;
 }
 
-/* Base nav link */
+/* nav link */
 .nav-link {
   display: inline-flex;
   align-items: center;
@@ -75,7 +82,7 @@
 .nav-ico { font-size: 16px; line-height: 1; }
 .nav-text { font-size: 14px; }
 
-/* Guest actions (Login / Register) */
+/* guest actions */
 .guest-actions { display: flex; gap: 10px; }
 .guest-actions .nav-link {
   padding: 8px 14px;
@@ -104,10 +111,10 @@
 
 .loading { color: var(--nav-text-dim); font-size: 14px; }
 
-/* User area (authenticated) */
+/* user area */
 .user-area { position: relative; }
 
-/* Avatar button */
+/* avatar button */
 .avatar-btn {
   padding: 0;
   border: 0;
@@ -124,7 +131,6 @@
 }
 .avatar-btn:hover { background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
 .avatar-btn:active { transform: translateY(1px); }
-
 .avatar-img {
   width: 100%;
   height: 100%;
@@ -132,24 +138,21 @@
   object-fit: cover;
   display: block;
 }
-
-/* Initials fallback – neutral gray default + perfect centering */
 .avatar-fallback {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background: #9CA3AF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
-  display: flex;                 /* מרכז אופקי ואנכי */
-  align-items: center;           /* אנכי */
-  justify-content: center;       /* אופקי */
-  line-height: 1;
   font-weight: 800;
   font-size: 12px;
   text-transform: uppercase;
 }
 
-/* Dropdown */
+/* dropdown */
 .dropdown {
   position: absolute;
   top: calc(100% + 10px);
@@ -180,7 +183,7 @@
 .drop-ico { width: 18px; text-align: center; }
 .drop-sep { height: 1px; background: var(--nav-border); margin: 4px 6px; }
 
-/* Focus rings */
+/* focus rings */
 .nav-link:focus-visible,
 .avatar-btn:focus-visible,
 .drop-item:focus-visible {
@@ -189,15 +192,73 @@
   border-radius: 8px;
 }
 
-/* RTL support (optional) */
+/* 🔎 search */
+.search-wrapper {
+  position: relative;
+  width: 260px;
+  margin: 0 16px;
+}
+.search-input {
+  width: 100%;
+  padding: 6px 10px 6px 28px;
+  border-radius: 8px;
+  border: 1px solid var(--nav-border);
+  background: var(--nav-hover);
+  font-size: 14px;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--active);
+  box-shadow: 0 0 0 2px rgba(59,130,246,.3);
+}
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--nav-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  z-index: 100;
+}
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.search-item:hover { background: var(--nav-hover); }
+.search-item.dim { color: var(--nav-text-dim); cursor: default; }
+.search-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #9CA3AF;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-texts { display: flex; flex-direction: column; }
+.search-name { font-weight: 600; color: var(--nav-text); }
+.search-sub { font-size: 12px; color: var(--nav-text-dim); }
+
+/* rtl support */
 :root[dir="rtl"] .header__left { justify-content: flex-end; }
 :root[dir="rtl"] .header__right { justify-content: flex-start; }
 :root[dir="rtl"] .dropdown { right: auto; left: 0; }
+:root[dir="rtl"] .search-input { padding: 6px 28px 6px 10px; }
 
-/* Responsive */
+/* responsive */
 @media (max-width: 720px) {
   .nav { gap: 12px; }
   .nav-link { padding: 6px 8px; }
   .guest-actions { gap: 8px; }
   .guest-actions .nav-link { padding: 8px 12px; }
+  .search-wrapper { width: 180px; margin: 0 8px; }
 }

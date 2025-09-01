@@ -54,6 +54,10 @@ const Header: React.FC = () => {
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
+  // search state
+  const [query, setQuery] = useState('');
+  const [showResults, setShowResults] = useState(false);
+
   useEffect(() => {
     let mounted = true;
     if (!isAuthenticated) {
@@ -113,32 +117,54 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="header__left">
-        {/* שינוי: משתמשים במחלקה logo-link (לא brand) כדי לבטל underline/visited */}
-        <Link to="/" className="logo-link">
+        <Link to="/" className="brand">
           <img src={logo} alt="WorkBridge Logo" className="logo" />
-          <span className="brand">WorkBridge</span>
+          <span>WorkBridge</span>
         </Link>
       </div>
 
-      <nav className="nav" aria-label="Global">
-        <NavLink to="/" end className={({ isActive }) => 'nav-link' + (isActive ? ' is-active' : '')}>
-          <span className="nav-ico" aria-hidden>🏠</span>
-          <span className="nav-text">Home</span>
-        </NavLink>
+      {/* nav + search in the middle */}
+      <div className="nav-area">
+        <nav className="nav" aria-label="Global">
+          <NavLink to="/" end className={({ isActive }) => 'nav-link' + (isActive ? ' is-active' : '')}>
+            <span className="nav-ico" aria-hidden>🏠</span>
+            <span className="nav-text">Home</span>
+          </NavLink>
+
+          {isAuthenticated && (
+            <>
+              <NavLink to="/feed" className={({ isActive }) => 'nav-link' + (isActive ? ' is-active' : '')}>
+                <span className="nav-ico" aria-hidden>📰</span>
+                <span className="nav-text">Feed</span>
+              </NavLink>
+              <NavLink to="/chat" className={({ isActive }) => 'nav-link' + (isActive ? ' is-active' : '')}>
+                <span className="nav-ico" aria-hidden>💬</span>
+                <span className="nav-text">Chat</span>
+              </NavLink>
+            </>
+          )}
+        </nav>
 
         {isAuthenticated && (
-          <>
-            <NavLink to="/feed" className={({ isActive }) => 'nav-link' + (isActive ? ' is-active' : '')}>
-              <span className="nav-ico" aria-hidden>📰</span>
-              <span className="nav-text">Feed</span>
-            </NavLink>
-            <NavLink to="/chat" className={({ isActive }) => 'nav-link' + (isActive ? ' is-active' : '')}>
-              <span className="nav-ico" aria-hidden>💬</span>
-              <span className="nav-text">Chat</span>
-            </NavLink>
-          </>
+          <div className="search-wrapper">
+            <input
+              type="text"
+              placeholder="Search people..."
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setShowResults(true);
+              }}
+              className="search-input"
+            />
+            {showResults && query && (
+              <div className="search-dropdown">
+                <div className="search-item">Example User</div>
+              </div>
+            )}
+          </div>
         )}
-      </nav>
+      </div>
 
       <div className="header__right">
         {loading ? (
@@ -157,8 +183,7 @@ const Header: React.FC = () => {
               {me?.avatar_url ? (
                 <img src={me.avatar_url} alt="" className="avatar-img" />
               ) : (
-                // שינוי: אין inline style – משתמשים בברירת המחדל האפורה מה-CSS
-                <span className="avatar-fallback" aria-hidden>
+                <span className="avatar-fallback" style={{ background: avatarColor }} aria-hidden>
                   {initials}
                 </span>
               )}
