@@ -6,9 +6,11 @@ def get_user_by_email_db(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
 
 def create_user_db(db: Session, user_data: UserCreate):
-    new_user=User(
-        email=user_data.email,
-        hashed_password=user_data.hashed_password
+    new_user = User(
+        email = user_data.email,
+        hashed_password=user_data.hashed_password,
+        first_name = user_data.first_name,
+        last_name = user_data.last_name,
                  )
     db.add(new_user)
     db.commit()

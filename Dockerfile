@@ -12,11 +12,18 @@ WORKDIR /app
 # RUN apt-get update && apt-get install -y --no-install-recommends build-essential && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy application source code
-COPY . .
+# Copy application backend source code
+COPY main.py            /app/
+COPY create_db_table.py /app/
+COPY db/                /app/db/
+COPY models/            /app/models/
+COPY routers/           /app/routers/
+COPY schemas/           /app/schemas/
+COPY utils/             /app/utils/
+
 
 # Create non-root user and set permissions
 RUN useradd -r -u 10001 appuser && chown -R appuser:appuser /app

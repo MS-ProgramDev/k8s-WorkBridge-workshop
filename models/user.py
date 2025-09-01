@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Computed
 from sqlalchemy.orm import relationship
 from db.database import Base
 
@@ -17,5 +17,13 @@ class User(Base):
     avatar_url = Column(Text, nullable=True)
     bio = Column(String(280), nullable=True)
     job_title = Column(String(100), nullable=True)
+
+    #generated column(read-only)
+
+    display_name = Column(
+        Text,
+        Computed("btrim(concat_ws(' ', first_name, last_name))", persisted=True),
+        nullable=False
+    )
 
     posts = relationship("Post", back_populates="owner", primaryjoin="User.email==Post.user_email")

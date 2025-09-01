@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, EmailStr, AnyHttpUrl, constr
+from pydantic import BaseModel, EmailStr, AnyHttpUrl, constr, ConfigDict
 
 """in future can add Fields like name, address, phone number, etc."""
 
@@ -39,5 +39,6 @@ class UserOut(BaseModel):
     avatar_url: Optional[str] = None
     bio:        Optional[str] = None
     job_title:  Optional[str] = None
+    display_name: Optional[str] = None  #(read-only)
 
-    from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

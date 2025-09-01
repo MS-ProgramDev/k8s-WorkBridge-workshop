@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
+import { useAuth } from '../contexts/AuthContext';
 import { API_BASE } from "../config";
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError('');
 
     // Basic client-side validation
     if (!email.includes('@')) {
@@ -28,28 +33,37 @@ function Register() {
       setIsLoading(false);
       return;
     }
+    if (firstName.trim().length < 2) {
+      setError('First name must be at least 2 characters.');
+      setIsLoading(false);
+      return;
+    }
+    if (lastName.trim().length < 2) {
+      setError('Last name must be at least 2 characters.');
+      setIsLoading(false);
+      return;
+    }
+
+
 
     try {
         const response = await fetch(`${API_BASE}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, first_name: firstName, last_name: lastName, }),
       });
 
       if (response.ok) {
         const data = await response.json();
 
         if (data.access_token) {
-          localStorage.setItem('token', data.access_token);
+          const token = data.access_token;
+          localStorage.setItem('token', token);
+          login(token, email);
+          setSuccess(true);
+          setError('');
+          navigate('/profile')
         }
-
-        setSuccess(true);
-        setError('');
-
-        // Navigate to FEED after successful registration
-        setTimeout(() => {
-          navigate('/feed');
-        }, 1500);
 
       } else {
         const data = await response.json();
@@ -80,6 +94,22 @@ function Register() {
           className="input"
           value={password}
           onChange={e => setPassword(e.target.value)}
+          disabled={isLoading}
+        />
+        <label className="label">First Name</label>
+        <input
+          type="text"
+          className="input"
+          value={firstName}
+          onChange={e => setFirstName(e.target.value)}
+          disabled={isLoading}
+        />
+        <label className="label">Last Name</label> {/* MOVED */}
+        <input
+          type="text"
+          className="input"
+          value={lastName}
+          onChange={e => setLastName(e.target.value)}
           disabled={isLoading}
         />
         <button
