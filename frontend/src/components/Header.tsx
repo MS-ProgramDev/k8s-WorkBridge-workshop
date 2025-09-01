@@ -68,7 +68,7 @@ const Header: React.FC = () => {
         if (!mounted) return;
         setMe(data);
       } catch {
-        // ignore
+        /* ignore */
       }
     })();
     return () => { mounted = false; };
@@ -113,7 +113,8 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="header__left">
-        <Link to="/" className="logo-link" aria-label="Home">
+        {/* שינוי: משתמשים במחלקה logo-link (לא brand) כדי לבטל underline/visited */}
+        <Link to="/" className="logo-link">
           <img src={logo} alt="WorkBridge Logo" className="logo" />
           <span className="brand">WorkBridge</span>
         </Link>
@@ -156,7 +157,8 @@ const Header: React.FC = () => {
               {me?.avatar_url ? (
                 <img src={me.avatar_url} alt="" className="avatar-img" />
               ) : (
-                <span className="avatar-fallback" style={{ background: avatarColor }} aria-hidden>
+                // שינוי: אין inline style – משתמשים בברירת המחדל האפורה מה-CSS
+                <span className="avatar-fallback" aria-hidden>
                   {initials}
                 </span>
               )}
