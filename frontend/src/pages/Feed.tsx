@@ -1,13 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { postApi, Post } from '../utils/postApi';
 import './Feed.css';
 
 function formatDate(s?: string) {
   if (!s) return '';
-  const d1 = new Date(s);
-  if (!isNaN(d1.getTime())) return d1.toLocaleString();
-  const d2 = new Date(s.replace(' ', 'T'));
-  return !isNaN(d2.getTime()) ? d2.toLocaleString() : '';
+  const iso = s.includes('T') ? s : s.replace(' ', 'T'); // מבטיח ISO
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '';
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Jerusalem',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).formatToParts(d);
+  const get = (type: string) => parts.find(p => p.type === type)?.value ?? '';
+  return `${get('day')}/${get('month')}/${get('year')} ${get('hour')}:${get('minute')}`;
+}
+
+
+function getEmailFromToken(): string | null {
+  const t = localStorage.getItem('token');
+  if (!t) return null;
+  try {
+    const payload = JSON.parse(atob(t.split('.')[1]));
+    return payload.sub || payload.email || null;
+  } catch {
+    return null;
+  }
 }
 
 const PAGE_SIZE = 20;
@@ -19,6 +41,8 @@ function Feed() {
   const [skip, setSkip] = useState(0);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+
+  const meEmail = useMemo(() => getEmailFromToken(), []);
 
   const loadPage = async (initial = false) => {
     try {
@@ -49,13 +73,45 @@ function Feed() {
     if (!newPostContent.trim()) return;
     try {
       const created = await postApi.createPost({ content: newPostContent.trim() });
-      // מוסיפים לראש הרשימה
       setPosts((prev) => [created, ...prev]);
       setNewPostContent('');
-      // כי הוספנו רשומה חדשה בתחילת הפיד
       setSkip((prev) => prev + 1);
     } catch {
       setError('Failed to create post');
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await postApi.deletePost(id);
+      setPosts((prev) => prev.filter((p) => p.id !== id));
+    } catch {
+      setError('Failed to delete post');
+    }
+  };
+
+  const handleToggleLike = async (postId: number, liked: boolean | undefined) => {
+    try {
+      if (liked) {
+        await postApi.unlikePost(postId);
+      } else {
+        await postApi.likePost(postId);
+      }
+      setPosts(prev =>
+        prev.map(p => {
+          if (p.id !== postId) return p;
+          const wasLiked = !!p.liked_by_me;
+          const nextLiked = !wasLiked;
+          const baseCount = typeof p.likes_count === 'number' ? p.likes_count : 0;
+          return {
+            ...p,
+            liked_by_me: nextLiked,
+            likes_count: baseCount + (nextLiked ? 1 : -1),
+          };
+        })
+      );
+    } catch {
+      setError('Failed to toggle like');
     }
   };
 
@@ -81,11 +137,39 @@ function Feed() {
 
       {posts.map((post) => (
         <div className="post" key={post.id}>
-        <div className="post-header">
-          <strong>{post.author_display_name || post.user_email}</strong>
-          {(post.author_display_name || post.user_email) && formatDate(post.created_at) && ' • '}
-          <span className="timestamp">{formatDate(post.created_at)}</span>
+          <div className="post-header">
+            <div className="post-meta">
+              <strong>{post.author_display_name || post.user_email}</strong>
+              {(post.author_display_name || post.user_email) && formatDate(post.created_at) && <span>•</span>}
+              <span className="timestamp">{formatDate(post.created_at)}</span>
+            </div>
+
+            <div className="post-actions">
+              <button
+                onClick={() => handleToggleLike(post.id, post.liked_by_me)}
+                className={`icon-btn ${post.liked_by_me ? 'liked' : ''}`}
+                aria-label={post.liked_by_me ? 'Unlike' : 'Like'}
+                title={post.liked_by_me ? 'Unlike' : 'Like'}
+              >
+                {post.liked_by_me ? '♥' : '♡'}
+              </button>
+              <span className="like-count">
+                {typeof post.likes_count === 'number' ? post.likes_count : 0}
+              </span>
+
+              {meEmail === post.user_email && (
+                <button
+                  onClick={() => handleDelete(post.id)}
+                  className="icon-btn delete"
+                  aria-label="Delete post"
+                  title="Delete post"
+                >
+                  🗑
+                </button>
+              )}
+            </div>
           </div>
+
           <p>{post.content}</p>
         </div>
       ))}

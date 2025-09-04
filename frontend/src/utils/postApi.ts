@@ -15,6 +15,8 @@ export interface Post {
   user_email: string;
   created_at: string;
   author_display_name?: string;
+  likes_count?: number;   
+  liked_by_me?: boolean;
 }
 
 export interface PostCreate {
@@ -31,6 +33,38 @@ export const postApi = {
   return res.json();
 },
 
+deletePost: async (id: number): Promise<void> => {
+  const res = await fetch(`${API_BASE}/posts/${id}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders()
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to delete post');
+  }
+},
+
+likePost: async (id: number): Promise<void> => {
+  const res = await fetch(`${API_BASE}/posts/${id}/like`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to like post');
+  }
+},
+
+unlikePost: async (id: number): Promise<void> => {
+  const res = await fetch(`${API_BASE}/posts/${id}/like`, {
+    method: 'DELETE',
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to unlike post');
+  }
+},
 
   createPost: async (postData: PostCreate): Promise<Post> => {
     const res = await fetch(`${API_BASE}/posts/`, {

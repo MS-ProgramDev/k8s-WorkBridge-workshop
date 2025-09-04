@@ -15,6 +15,8 @@ class PostOut(BaseModel):
     user_email: EmailStr  # The email of the user who created the post (extracted from JWT)
     created_at: datetime  # When the post was created (auto-generated)
     author_display_name: Optional[str] = None
+    likes_count: Optional[int] = 0
+    liked_by_me: Optional[bool] = False
 
     class Config:
         from_attributes = True  # allow returning SQLAlchemy model instances
