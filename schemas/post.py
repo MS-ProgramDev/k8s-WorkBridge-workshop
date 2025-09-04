@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
 
@@ -12,5 +12,9 @@ class PostCreate(BaseModel):
 class PostOut(BaseModel):
     id: int  # Unique identifier for the post
     content: str  # The text content of the post
-    user_email: str  # The email of the user who created the post (extracted from JWT)
+    user_email: EmailStr  # The email of the user who created the post (extracted from JWT)
     created_at: datetime  # When the post was created (auto-generated)
+    author_display_name: Optional[str] = None
+
+    class Config:
+        from_attributes = True  # allow returning SQLAlchemy model instances

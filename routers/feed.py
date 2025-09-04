@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 import models, schemas
 from models.post import Post
 from utils.auth_token import get_current_user
-from schemas.post import PostCreate
+from schemas.post import PostCreate, PostOut
 from db.database import Base
 from models.user import User
 from db.database import SessionLocal
@@ -23,20 +23,30 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/posts/", response_model=schemas.post.PostCreate)
-def create_post(post: PostCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+@router.post("/posts/", response_model=PostOut, status_code=201)
+def create_post(
+    post: PostCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     try:
-        # יצירת הפוסט עם המשתמש הנוכחי
-        new_post = create_post_db(db, post, current_user.email, datetime.utcnow())
-        return new_post
+        obj = Post(content=post.content, user_email=current_user.email)
+        db.add(obj)
+        db.commit()
+        db.refresh(obj)
+        return obj
     except IntegrityError:
         db.rollback()
         raise HTTPException(status_code=400, detail="Failed to create post due to integrity error")
-    except Exception as e:
+    except Exception:
+        logger.exception("Failed to create post")
         raise HTTPException(status_code=500, detail="Failed to create post")
 
-@router.get("/posts/", response_model=List[schemas.post.PostOut])
-def get_posts(db: Session = Depends(get_db)):
-    posts = db.query(Post).all()
+@router.get("/posts/", response_model=List[PostOut])
+def get_posts(
+    db: Session = Depends(get_db),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(20, le=100)
+):
+    posts = db.query(Post).order_by(Post.created_at.desc()).offset(skip).limit(limit).all()
     return posts
-

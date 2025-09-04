@@ -5,11 +5,10 @@ from models.post import Post
 from schemas.post import PostCreate
 from datetime import datetime
 
-def create_post_db(db: Session, post_data: PostCreate, user_email: str, date: datetime):
+def create_post_db(db: Session, post_data: PostCreate, user_email: str):
     new_post = Post(
         content=post_data.content,
         user_email=user_email,
-        created_at=date
     )
     db.add(new_post)
     db.commit()
