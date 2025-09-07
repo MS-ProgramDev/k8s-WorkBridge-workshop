@@ -36,7 +36,13 @@ export interface GroupCreate {
   name: string;
 }
 
-// API Functions
+// === NEW: Search users result ===
+export interface UserSearchResult {
+  id: number;
+  display_name: string;
+  job_title?: string | null;
+}
+
 export const chatApi = {
   // Send a message (direct or group)
   sendMessage: async (messageData: MessageCreate): Promise<Message> => {
@@ -128,7 +134,7 @@ export const chatApi = {
     return response.json();
   },
 
-  // ADD THIS FUNCTION
+  // Check if user exists by email
   checkUserExists: async (email: string): Promise<{ exists: boolean }> => {
     const response = await fetch(`${API_BASE}/auth/users/exists/${email}`, {
       method: 'GET',
@@ -141,5 +147,19 @@ export const chatApi = {
     }
 
     return response.json();
+  },
+
+  searchUsers: async (q: string, limit = 5): Promise<UserSearchResult[]> => {
+  const base = API_BASE.replace(/\/$/, ''); // מוריד "/" מיותר בסוף
+  const url = `${base}/users/search?q=${encodeURIComponent(q)}&limit=${limit}`;
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: getAuthHeaders()
+  });
+  if (!res.ok) {
+    console.warn('users/search failed', res.status);
+    return [];
   }
+  return res.json();
+}
 };

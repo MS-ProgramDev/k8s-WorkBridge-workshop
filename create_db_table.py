@@ -14,7 +14,7 @@ from db.database import Base, engine
 import models.user
 import models.chat  # ADD THIS IMPORT
 import models.post
-
+import models.post_like
 
 # Create all tables defined by models inheriting from Base
 Base.metadata.create_all(bind=engine)

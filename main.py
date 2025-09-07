@@ -5,6 +5,8 @@ from pydantic import BaseModel, EmailStr
 from routers import auth as auth_routes
 from routers import chat as chat_routes
 from routers import feed as post_routes
+from routers import users as users_router
+
 from utils import logging_config
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer
@@ -48,7 +50,7 @@ app.add_middleware(
 app.include_router(post_routes.router)
 app.include_router(auth_routes.router, prefix="/auth", tags=["auth"])
 app.include_router(chat_routes.router, prefix="/chat", tags=["chat"])
-
+app.include_router(users_router.router, prefix="/users", tags=["users"])
 
 bearer_scheme = HTTPBearer()
 

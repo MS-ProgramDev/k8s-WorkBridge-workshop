@@ -22,7 +22,7 @@ class User(Base):
 
     display_name = Column(
         Text,
-        Computed("btrim(concat_ws(' ', first_name, last_name))", persisted=True),
+        Computed("btrim(first_name || ' ' || last_name)", persisted=True),
         nullable=False
     )
 

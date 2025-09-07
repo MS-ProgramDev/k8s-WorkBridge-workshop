@@ -9,6 +9,8 @@ import Profile from './pages/Profile';
 import Feed from './pages/Feed';
 import Settings from './pages/Settings';
 import Chat from './pages/Chat';
+import UserPublicProfile from './pages/UserPublicProfile';
+
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/users/:id" element={<UserPublicProfile />} />
         </Routes>
       </Router>
     </AuthProvider>

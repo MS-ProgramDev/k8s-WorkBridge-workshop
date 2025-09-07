@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import logo from '../assets/logo.jpg';
 import './Header.css';
 import { API_BASE } from '../config';
+import { chatApi, UserSearchResult } from '../utils/chatApi'; // <-- added
 
 type Me = {
   email: string;
@@ -57,6 +58,9 @@ const Header: React.FC = () => {
   // search state
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
+  const [results, setResults] = useState<UserSearchResult[]>([]); // <-- added
+  const [highlight, setHighlight] = useState<number>(-1);         // <-- added
+  const searchWrapRef = useRef<HTMLDivElement | null>(null);       // <-- added
 
   useEffect(() => {
     let mounted = true;
@@ -80,15 +84,24 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
-      if (!menuOpen) return;
       const t = e.target as Node;
-      if (menuRef.current && !menuRef.current.contains(t) &&
+      // close user menu
+      if (menuOpen && menuRef.current && !menuRef.current.contains(t) &&
           btnRef.current && !btnRef.current.contains(t)) {
         setMenuOpen(false);
       }
+      // close search dropdown
+      if (showResults && searchWrapRef.current && !searchWrapRef.current.contains(t)) {
+        setShowResults(false);
+        setHighlight(-1);
+      }
     }
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+        setShowResults(false);
+        setHighlight(-1);
+      }
     }
     document.addEventListener('mousedown', onDocClick);
     document.addEventListener('keydown', onKey);
@@ -96,7 +109,57 @@ const Header: React.FC = () => {
       document.removeEventListener('mousedown', onDocClick);
       document.removeEventListener('keydown', onKey);
     };
-  }, [menuOpen]);
+  }, [menuOpen, showResults]);
+
+  // debounce search (minimal)
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    if (!isAuthenticated) return;
+    const q = query.trim();
+    if (!q) {
+      setResults([]);
+      setHighlight(-1);
+      return;
+    }
+    timer = setTimeout(async () => {
+      try {
+        const list = await chatApi.searchUsers(q, 5);
+        setResults(list);
+        setShowResults(true);
+        setHighlight(list.length ? 0 : -1);
+      } catch {
+        setResults([]);
+        setShowResults(false);
+        setHighlight(-1);
+      }
+    }, 300);
+    return () => { if (timer) clearTimeout(timer); };
+  }, [query, isAuthenticated]);
+
+  const choose = (item: UserSearchResult) => {
+    setShowResults(false);
+    setQuery('');
+    setResults([]);
+    setHighlight(-1);
+    navigate(`/users/${item.id}`);
+  };
+
+  const onSearchKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (!showResults || results.length === 0) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setHighlight(h => Math.min(h + 1, results.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setHighlight(h => Math.max(h - 1, 0));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (highlight >= 0) choose(results[highlight]);
+    } else if (e.key === 'Escape') {
+      setShowResults(false);
+      setHighlight(-1);
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -146,20 +209,51 @@ const Header: React.FC = () => {
         </nav>
 
         {isAuthenticated && (
-          <div className="search-wrapper">
+          <div className="search-wrapper" ref={searchWrapRef}>
             <input
               type="text"
               placeholder="Search people..."
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
-                setShowResults(true);
+                if (!showResults) setShowResults(true);
               }}
+              onKeyDown={onSearchKeyDown}
               className="search-input"
             />
             {showResults && query && (
-              <div className="search-dropdown">
-                <div className="search-item">Example User</div>
+              <div className="search-dropdown" role="listbox">
+                {results.length === 0 ? (
+                  <div className="search-item" aria-disabled>
+                    No results
+                  </div>
+                ) : (
+                  results.map((u, idx) => {
+                    const parts = (u.display_name || '').split(' ');
+                    const initials2 = initialsFromName(parts[0], parts[1]);
+                    const color = colorFromEmail(u.display_name || 'X');
+                    return (
+                      <div
+                        key={u.id}
+                        className={`search-item${idx === highlight ? ' is-active' : ''}`}
+                        role="option"
+                        aria-selected={idx === highlight}
+                        onMouseEnter={() => setHighlight(idx)}
+                        onMouseDown={(e) => { e.preventDefault(); choose(u); }}
+                      >
+                        <span className="search-avatar" style={{ background: color }}>
+                          {initials2}
+                        </span>
+                        <div className="search-texts">
+                          <div className="search-primary">{u.display_name}</div>
+                          {u.job_title && (
+                            <div className="search-secondary">{u.job_title}</div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
               </div>
             )}
           </div>
