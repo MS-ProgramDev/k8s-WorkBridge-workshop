@@ -1,8 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel, EmailStr, AnyHttpUrl, constr, ConfigDict
 
-"""in future can add Fields like name, address, phone number, etc."""
-
 # ===== Input from client: Registration =====
 class UserRegister(BaseModel):
     email: EmailStr
@@ -40,5 +38,24 @@ class UserOut(BaseModel):
     bio:        Optional[str] = None
     job_title:  Optional[str] = None
     display_name: Optional[str] = None  #(read-only)
+
+    model_config = ConfigDict(from_attributes=True)
+
+# ===== Output to client: Public profile (/users/{id}/public) =====
+class UserPublicOut(BaseModel):
+    id: int
+    display_name: str
+    job_title: Optional[str] = None
+    avatar_url: Optional[str] = None
+    bio: Optional[str] = None
+    email: EmailStr  
+
+    model_config = ConfigDict(from_attributes=True)
+
+    # ---------- Search users (by display_name only) ----------
+class UserSearchResult(BaseModel):
+    id: int
+    display_name: str
+    job_title: Optional[str] = None
 
     model_config = ConfigDict(from_attributes=True)

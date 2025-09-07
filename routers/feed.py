@@ -12,6 +12,7 @@ from models.post_like import PostLike
 from sqlalchemy import and_
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
 def get_db():
     db = SessionLocal()
     try:
