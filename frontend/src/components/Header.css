@@ -36,20 +36,10 @@
   color: var(--nav-text);
   text-decoration: none;
   font-weight: 800;
-  height: var(--nav-h);
-}
-.logo-box {
-  width: 40px;
   height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 6px;
-  background: transparent;
 }
 .logo {
-  height: 32px;
+  height: 30px;
   width: auto;
   border-radius: 4px;
   display: block;
@@ -240,11 +230,17 @@
   font-size: 14px;
 }
 .search-item:hover { background: var(--nav-hover); }
+
+/* NEW: active (keyboard highlight) */
 .search-item.is-active { background: var(--nav-hover); }
+
+/* NEW: disabled result (e.g., "No results") */
 .search-item[aria-disabled] {
   color: var(--nav-text-dim);
   cursor: default;
 }
+
+/* avatar + texts */
 .search-avatar {
   width: 28px;
   height: 28px;
@@ -258,8 +254,11 @@
   justify-content: center;
 }
 .search-texts { display: flex; flex-direction: column; }
+
+/* NEW: names mapping to the classes used in TSX */
 .search-primary { font-weight: 600; color: var(--nav-text); }
 .search-secondary { font-size: 12px; color: var(--nav-text-dim); }
+
 .search-name { font-weight: 600; color: var(--nav-text); }
 .search-sub  { font-size: 12px; color: var(--nav-text-dim); }
 

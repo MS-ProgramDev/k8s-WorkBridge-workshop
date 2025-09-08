@@ -179,9 +179,7 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="header__left">
         <Link to="/" className="brand">
-          <span className="logo-box">
-        <img src={logo} alt="WorkBridge Logo" className="logo" />
-      </span>
+          <img src={logo} alt="WorkBridge Logo" className="logo" />
           <span>WorkBridge</span>
         </Link>
       </div>
