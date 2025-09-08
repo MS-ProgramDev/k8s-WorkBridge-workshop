@@ -148,9 +148,20 @@ export const chatApi = {
 
     return response.json();
   },
+  // Lookup user details by email
+    lookupUser: async (email: string): Promise<{ id: number; display_name: string }> => {
+    const res = await fetch(`${API_BASE}/users/lookup?email=${encodeURIComponent(email)}`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) {
+      throw new Error('User not found');
+    }
+    return res.json();
+  },
 
   searchUsers: async (q: string, limit = 5): Promise<UserSearchResult[]> => {
-  const base = API_BASE.replace(/\/$/, ''); // מוריד "/" מיותר בסוף
+  const base = API_BASE.replace(/\/$/, ''); 
   const url = `${base}/users/search?q=${encodeURIComponent(q)}&limit=${limit}`;
   const res = await fetch(url, {
     method: 'GET',

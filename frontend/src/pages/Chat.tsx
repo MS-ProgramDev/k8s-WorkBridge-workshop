@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { chatApi, Message } from '../utils/chatApi';
 import './Chat.css';
 
 interface Conversation {
-  id: string;
-  name: string;
-  type: 'user'; // Type is now always 'user'
+  id: string;              // email
+  name: string;            // display_name
+  type: 'user';
   lastMessage?: string;
   lastMessageTime?: string;
+  isNew?: boolean;         // true if no history yet
 }
 
 const Chat: React.FC = () => {
@@ -20,70 +22,137 @@ const Chat: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // For creating new conversations
-  const [showNewChat, setShowNewChat] = useState(false);
-  const [newChatEmail, setNewChatEmail] = useState('');
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom of messages
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  // Load conversations on component mount
   useEffect(() => {
     loadConversations();
   }, []);
+
+  // Handle /chat?to=<email>
+  useEffect(() => {
+    const to = (searchParams.get('to') || '').trim();
+    if (!to) return;
+
+    if (user?.email && to.toLowerCase() === user.email.toLowerCase()) {
+      navigate('/chat', { replace: true });
+      return;
+    }
+
+    openChatByEmail(to);
+    navigate('/chat', { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const loadConversations = async () => {
     try {
       setLoading(true);
       const allMessages = await chatApi.getMyMessages();
 
-      // Extract unique user conversations from messages
       const conversationMap = new Map<string, Conversation>();
-
-      allMessages.forEach(message => {
-        // We only process direct messages, ignoring groups
+      for (const message of allMessages) {
         if (!message.is_group) {
-          const otherUser = message.sender_id === user?.email ? message.recipient_id : message.sender_id;
+          const myEmail = user?.email || '';
+          const otherUser =
+            message.sender_id.toLowerCase() === myEmail.toLowerCase()
+              ? message.recipient_id
+              : message.sender_id;
+
+          if (myEmail && otherUser.toLowerCase() === myEmail.toLowerCase()) continue;
+
           if (!conversationMap.has(otherUser)) {
+            let display = otherUser;
+            try {
+              const profile = await chatApi.lookupUser(otherUser);
+              display = profile?.display_name || otherUser;
+            } catch {
+              /* ignore lookup failure */
+            }
             conversationMap.set(otherUser, {
               id: otherUser,
-              name: otherUser,
-              type: 'user', // Always a user conversation
+              name: display,
+              type: 'user',
               lastMessage: message.content,
-              lastMessageTime: message.timestamp
+              lastMessageTime: message.timestamp,
             });
+          } else {
+            const prev = conversationMap.get(otherUser)!;
+            if (!prev.lastMessageTime || new Date(message.timestamp) > new Date(prev.lastMessageTime)) {
+              conversationMap.set(otherUser, {
+                ...prev,
+                lastMessage: message.content,
+                lastMessageTime: message.timestamp,
+              });
+            }
           }
         }
-      });
-
+      }
       setConversations(Array.from(conversationMap.values()));
     } catch (err) {
-      setError('Failed to load conversations');
       console.error('Error loading conversations:', err);
+      setError('Failed to load conversations');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const openChatByEmail = async (email: string) => {
+    try {
+      const target = email.trim();
+      if (!target) return;
+
+      const existing = conversations.find(c => c.id.toLowerCase() === target.toLowerCase());
+      if (existing) {
+        await loadMessages(existing);
+        return;
+      }
+
+      try {
+        const { exists } = await chatApi.checkUserExists(target);
+        if (!exists) {
+          setError('Target user does not exist.');
+          return;
+        }
+      } catch {
+        /* allow compose even if exists-check failed temporarily */
+      }
+
+      let display = target;
+      try {
+        const u = await chatApi.lookupUser(target);
+        display = u?.display_name || target;
+      } catch {
+        /* ignore lookup failure */
+      }
+
+      const newConv: Conversation = { id: target, name: display, type: 'user', isNew: true };
+      setConversations(prev => [...prev, newConv]);
+      setSelectedConversation(newConv);
+      setMessages([]);
+    } catch (e) {
+      console.error(e);
+      setError('Failed to open chat.');
     }
   };
 
   const loadMessages = async (conversation: Conversation) => {
     try {
       setLoading(true);
-      // Now we only need to get messages for a user
-      const messagesData = await chatApi.getMessagesWithUser(conversation.id);
-
-      setMessages(messagesData);
+      const data = await chatApi.getMessagesWithUser(conversation.id);
+      setMessages(data);
       setSelectedConversation(conversation);
     } catch (err) {
-      setError('Failed to load messages');
       console.error('Error loading messages:', err);
+      setError('Failed to load messages');
     } finally {
       setLoading(false);
     }
@@ -91,181 +160,101 @@ const Chat: React.FC = () => {
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !selectedConversation) return;
-
     try {
       const messageData = {
         recipient_id: selectedConversation.id,
         content: newMessage.trim(),
-        is_group: false // This is now always false
+        is_group: false,
       };
-
-      const sentMessage = await chatApi.sendMessage(messageData);
-      setMessages(prev => [...prev, sentMessage]);
+      const sent = await chatApi.sendMessage(messageData);
+      setMessages(prev => [...prev, sent]);
       setNewMessage('');
 
-      // Update conversation last message
       setConversations(prev =>
         prev.map(conv =>
           conv.id === selectedConversation.id
-            ? { ...conv, lastMessage: sentMessage.content, lastMessageTime: sentMessage.timestamp }
+            ? { ...conv, lastMessage: sent.content, lastMessageTime: sent.timestamp, isNew: false }
             : conv
         )
       );
     } catch (err) {
-      setError('Failed to send message');
       console.error('Error sending message:', err);
+      setError('Failed to send message');
     }
   };
 
-  const startNewChat = async () => {
-    // Basic validation to ensure the input is not empty or the user's own email
-    if (!newChatEmail.trim() || newChatEmail.trim().toLowerCase() === user?.email.toLowerCase()) {
-      setError("Please enter another user's email address.");
-      return;
-    }
-
-    setLoading(true);
-    setError(''); // Clear previous errors
-
-    try {
-      // Call the backend to verify the user exists
-      const { exists } = await chatApi.checkUserExists(newChatEmail);
-
-      if (!exists) {
-        setError('This user does not exist. Please check the email address.');
-        setLoading(false);
-        return; // Stop the function if the user is not found
-      }
-
-      // If the user exists, proceed with creating the chat
-      const existingConv = conversations.find(conv => conv.id === newChatEmail);
-      if (existingConv) {
-        setSelectedConversation(existingConv);
-        loadMessages(existingConv);
-      } else {
-        const newConv: Conversation = {
-          id: newChatEmail,
-          name: newChatEmail,
-          type: 'user'
-        };
-        setConversations(prev => [...prev, newConv]);
-        setSelectedConversation(newConv);
-        setMessages([]);
-      }
-
-      setNewChatEmail('');
-      setShowNewChat(false);
-
-    } catch (err) {
-      setError('An error occurred while trying to start the chat.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formatTime = (timestamp: string) => {
-    return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
+  const formatTime = (timestamp: string) =>
+    new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   return (
     <div className="chat-container">
-      {/* Sidebar */}
       <div className="chat-sidebar">
         <div className="chat-header">
           <h2>Messages</h2>
-          <div className="chat-actions">
-            <button onClick={() => setShowNewChat(!showNewChat)} className="btn-new-chat">
-              New Chat
-            </button>
-            {/* "New Group" button removed */}
-          </div>
         </div>
 
-        {/* New Chat Form */}
-        {showNewChat && (
-          <div className="new-chat-form">
-            <input
-              type="email"
-              placeholder="Enter email address"
-              value={newChatEmail}
-              onChange={(e) => setNewChatEmail(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && startNewChat()}
-            />
-            <div className="form-actions">
-              <button onClick={startNewChat}>Start Chat</button>
-              <button onClick={() => setShowNewChat(false)}>Cancel</button>
-            </div>
-          </div>
-        )}
-
-        {/* "Join Group" form removed */}
-
-        {/* Conversations List */}
         <div className="conversations-list">
-          {conversations.map(conversation => (
+          {conversations.map(conv => (
             <div
-              key={conversation.id}
-              className={`conversation-item ${selectedConversation?.id === conversation.id ? 'active' : ''}`}
-              onClick={() => loadMessages(conversation)}
+              key={conv.id}
+              className={`conversation-item ${selectedConversation?.id === conv.id ? 'active' : ''}`}
+              onClick={() => loadMessages(conv)}
             >
               <div className="conversation-info">
-                <div className="conversation-name">
-                  {conversation.name}
-                </div>
-                {conversation.lastMessage && (
+                <div className="conversation-name">{conv.name}</div>
+                {conv.lastMessage && (
                   <div className="conversation-preview">
-                    {conversation.lastMessage.substring(0, 50)}
-                    {conversation.lastMessage.length > 50 ? '...' : ''}
+                    {conv.lastMessage.substring(0, 50)}
+                    {conv.lastMessage.length > 50 ? '…' : ''}
                   </div>
                 )}
               </div>
-              {conversation.lastMessageTime && (
-                <div className="conversation-time">
-                  {formatTime(conversation.lastMessageTime)}
-                </div>
+              {conv.lastMessageTime && (
+                <div className="conversation-time">{formatTime(conv.lastMessageTime)}</div>
               )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Main Chat Area */}
       <div className="chat-main">
         {selectedConversation ? (
           <>
-            {/* Chat Header */}
             <div className="chat-main-header">
-              <h3>
-                {selectedConversation.name}
-              </h3>
+              <h3>{selectedConversation.name}</h3>
             </div>
 
-            {/* Messages */}
             <div className="messages-container">
-              {messages.map(message => (
+              {messages.map(msg => (
                 <div
-                  key={message.id}
-                  className={`message ${message.sender_id === user?.email ? 'message-own' : 'message-other'}`}
+                  key={msg.id}
+                  className={`message ${msg.sender_id === user?.email ? 'message-own' : 'message-other'}`}
                 >
                   <div className="message-info">
-                    <span className="message-sender">{message.sender_id}</span>
-                    <span className="message-time">{formatTime(message.timestamp)}</span>
+                    <span className="message-sender">
+                      {msg.sender_id === user?.email ? 'You' : selectedConversation.name}
+                    </span>
+                    <span className="message-time">{formatTime(msg.timestamp)}</span>
                   </div>
-                  <div className="message-content">{message.content}</div>
+                  <div className="message-content">{msg.content}</div>
                 </div>
               ))}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Message Input */}
+            {selectedConversation.isNew && (
+              <div className="new-conv-hint">
+                Start a new conversation with {selectedConversation.name}
+              </div>
+            )}
+
             <div className="message-input-container">
               <input
                 type="text"
                 placeholder="Type a message..."
                 value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                onChange={e => setNewMessage(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && sendMessage()}
                 className="message-input"
               />
               <button onClick={sendMessage} className="send-button">
@@ -276,12 +265,11 @@ const Chat: React.FC = () => {
         ) : (
           <div className="chat-placeholder">
             <h3>Select a conversation to start chatting</h3>
-            <p>Choose from your existing conversations or start a new one.</p>
+            <p>Choose from your existing conversations.</p>
           </div>
         )}
       </div>
 
-      {/* Error Display */}
       {error && (
         <div className="error-message">
           {error}

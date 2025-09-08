@@ -11,7 +11,7 @@ type UserPublic = {
   job_title?: string | null;
   avatar_url?: string | null;
   bio?: string | null;
-  email: string; // used for Message only (not shown)
+  email?: string | null; // may be missing when viewer isn't authenticated
 };
 
 const authHeaders = () => {
@@ -46,16 +46,12 @@ export default function UserPublicProfile() {
     (async () => {
       try {
         setLoading(true);
-        setError(null); // reset old error before fetching
+        setError(null);
         const res = await fetch(`${API_BASE}/users/${id}/public`, {
           headers: authHeaders(),
         });
-        if (res.status === 404) {
-          throw new Error("User not found");
-        }
-        if (!res.ok) {
-          throw new Error(`GET /users/${id}/public failed (${res.status})`);
-        }
+        if (res.status === 404) throw new Error("User not found");
+        if (!res.ok) throw new Error(`GET /users/${id}/public failed (${res.status})`);
         const data: UserPublic = await res.json();
         if (!mounted) return;
         setUser(data);
@@ -77,9 +73,7 @@ export default function UserPublicProfile() {
       </div>
     );
   }
-  if (loading) {
-    return <div className="profile-container">Loading…</div>;
-  }
+  if (loading) return <div className="profile-container">Loading…</div>;
   if (error || !user) {
     return (
       <div className="profile-container">
@@ -92,13 +86,11 @@ export default function UserPublicProfile() {
   const roleLabel = user.job_title?.trim() || "Member";
   const hasAvatar = !!(user.avatar_url && user.avatar_url.trim() !== "");
   const isSelf =
-    !!me?.email &&
-    !!user.email &&
-    me.email.toLowerCase() === user.email.toLowerCase();
+    !!me?.email && !!user.email && me.email.toLowerCase() === user.email.toLowerCase();
+  const canMessage = !!user.email && !isSelf;
 
   const handleMessage = () => {
-    if (!user.email) return; // guard for future changes
-    if (isSelf) return; // prevent opening chat with yourself
+    if (!canMessage || !user.email) return;
     navigate(`/chat?to=${encodeURIComponent(user.email)}`);
   };
 
@@ -120,9 +112,7 @@ export default function UserPublicProfile() {
             <div className="profile-name">{nameToShow}</div>
 
             <div className="profile-actions">
-              <span className="badge" aria-label="User role">
-                {roleLabel}
-              </span>
+              <span className="badge" aria-label="User role">{roleLabel}</span>
             </div>
 
             {user.bio && user.bio.trim() !== "" && (
@@ -138,8 +128,15 @@ export default function UserPublicProfile() {
                 className="btn btn-primary"
                 type="button"
                 onClick={handleMessage}
+                disabled={!canMessage}
+                title={
+                  !user.email
+                    ? "Login to message"
+                    : isSelf
+                    ? "You can't message yourself"
+                    : undefined
+                }
                 aria-label={`Message ${nameToShow}`}
-                title={isSelf ? "You can't message yourself" : undefined}
               >
                 Message
               </button>

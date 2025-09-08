@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict,EmailStr
 from typing import Optional, List
 
 from db.database import SessionLocal
@@ -43,3 +43,13 @@ def search_users(
         .all()
     )
     return results
+
+@router.get("/lookup")
+def lookup_user(
+    email: EmailStr = Query(..., description="User email to look up"),
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"id": user.id, "display_name": user.display_name}
