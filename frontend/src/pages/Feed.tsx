@@ -4,22 +4,19 @@ import './Feed.css';
 
 function formatDate(s?: string) {
   if (!s) return '';
-  const iso = s.includes('T') ? s : s.replace(' ', 'T'); // מבטיח ISO
+  const iso = s.includes('T') ? s : s.replace(' ', 'T');
   const d = new Date(iso);
   if (isNaN(d.getTime())) return '';
-  const parts = new Intl.DateTimeFormat('en-GB', {
+  return new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Asia/Jerusalem',
     year: 'numeric',
-    month: '2-digit',
+    month: 'short',
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-  }).formatToParts(d);
-  const get = (type: string) => parts.find(p => p.type === type)?.value ?? '';
-  return `${get('day')}/${get('month')}/${get('year')} ${get('hour')}:${get('minute')}`;
+  }).format(d);
 }
-
 
 function getEmailFromToken(): string | null {
   const t = localStorage.getItem('token');
@@ -117,7 +114,9 @@ function Feed() {
 
   return (
     <div className="feed-container">
-      <h1>Team Feed</h1>
+      <div className="feed-header">
+        <h1>Company Feed</h1>
+      </div>
 
       <div className="post-form-container">
         <form onSubmit={handleCreatePost} className="post-form">
@@ -135,44 +134,52 @@ function Feed() {
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      {posts.map((post) => (
-        <div className="post" key={post.id}>
-          <div className="post-header">
-            <div className="post-meta">
-              <strong>{post.author_display_name || post.user_email}</strong>
-              {(post.author_display_name || post.user_email) && formatDate(post.created_at) && <span>•</span>}
-              <span className="timestamp">{formatDate(post.created_at)}</span>
-            </div>
-
-            <div className="post-actions">
-              <button
-                onClick={() => handleToggleLike(post.id, post.liked_by_me)}
-                className={`icon-btn ${post.liked_by_me ? 'liked' : ''}`}
-                aria-label={post.liked_by_me ? 'Unlike' : 'Like'}
-                title={post.liked_by_me ? 'Unlike' : 'Like'}
-              >
-                {post.liked_by_me ? '♥' : '♡'}
-              </button>
-              <span className="like-count">
-                {typeof post.likes_count === 'number' ? post.likes_count : 0}
-              </span>
-
-              {meEmail === post.user_email && (
+      {posts.length === 0 && !loading ? (
+        <div className="feed-empty">
+          <h3>No posts yet</h3>
+          <p>Start the conversation with your first post.</p>
+          <button className="post-button" onClick={(e) => handleCreatePost(e as any)}>
+            Create first post
+          </button>
+        </div>
+      ) : (
+        posts.map((post) => (
+          <div className="post" key={post.id}>
+            <div className="post-header">
+              <div className="post-meta">
+                <strong>{post.author_display_name || post.user_email}</strong>
+              </div>
+              <div className="post-time">{formatDate(post.created_at)}</div>
+              <div className="post-actions">
                 <button
-                  onClick={() => handleDelete(post.id)}
-                  className="icon-btn delete"
-                  aria-label="Delete post"
-                  title="Delete post"
+                  onClick={() => handleToggleLike(post.id, post.liked_by_me)}
+                  className={`icon-btn ${post.liked_by_me ? 'liked' : ''}`}
+                  aria-label={post.liked_by_me ? 'Unlike' : 'Like'}
+                  title={post.liked_by_me ? 'Unlike' : 'Like'}
                 >
-                  🗑
+                  {post.liked_by_me ? '♥' : '♡'}
                 </button>
-              )}
+                <span className="like-count">
+                  {typeof post.likes_count === 'number' ? post.likes_count : 0}
+                </span>
+                {meEmail === post.user_email && (
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className="icon-btn delete"
+                    aria-label="Delete post"
+                    title="Delete post"
+                  >
+                    🗑
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className="post-body">
+              <p>{post.content}</p>
             </div>
           </div>
-
-          <p>{post.content}</p>
-        </div>
-      ))}
+        ))
+      )}
 
       {hasMore && (
         <div style={{ textAlign: 'center', marginTop: 16 }}>

@@ -14,16 +14,21 @@ function Home() {
     );
   }
 
+  const displayName =
+    (user as any)?.display_name ||
+    `${(user as any)?.first_name ?? ''} ${(user as any)?.last_name ?? ''}`.trim() ||
+    user?.email ||
+    'User';
+
   return (
     <div className="home-container">
       <h1>Welcome to WorkBridge</h1>
-      
+
       {isAuthenticated ? (
-        // Content for authenticated users
         <>
-          <p>Welcome back, {user?.email}!</p>
+          <p>Welcome back, {displayName}!</p>
           <p>Your team's communication, all in one place.</p>
-          
+
           <div className="buttons">
             <Link to="/feed" className="home-button">View Feed</Link>
             <Link to="/chat" className="home-button">Open Chat</Link>
@@ -31,10 +36,9 @@ function Home() {
           </div>
         </>
       ) : (
-        // Content for non-authenticated users
         <>
           <p>Your team's communication, all in one place.</p>
-          
+
           <div className="buttons">
             <Link to="/login" className="home-button">Login</Link>
             <Link to="/register" className="home-button">Register</Link>

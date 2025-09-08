@@ -6,42 +6,91 @@
   padding: 30px;
 }
 
-.post {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.post-header {
-  display: flex; /* חדש: יישור בין מטא לאקשנס */
+/* Header bar for "Company Feed" */
+.feed-header {
+  display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.feed-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Post card */
+.post {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 16px 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Header row inside post */
+.post-header {
+  position: relative; /* allow absolute timestamp */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* meta first, actions next */
   color: #444;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  gap: 10px;
+  padding-right: 96px; /* room for the timestamp on the right */
 }
 
 .post-meta {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
 }
 
+/* Hide the plain bullet span that sits between author and time in current markup */
+.post-meta > span:not(.timestamp) {
+  display: none;
+}
+
+/* Actions stay inline after meta */
 .post-actions {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: 10px;
 }
 
+/* Time pinned to top-right of the post */
 .timestamp {
-  color: #888;
-  font-size: 0.9em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #6b7280;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
-/* New styles for post creation form */
+/* Post body */
+.post p {
+  margin: 6px 0 0;
+  color: #111827;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Create form */
 .post-form-container {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .post-form {
@@ -53,24 +102,33 @@
   width: 100%;
   min-height: 80px;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
   margin-bottom: 10px;
   font-family: inherit;
   font-size: 1em;
+  outline: none;
+}
+
+.post-textarea:focus {
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, .35);
 }
 
 .post-button {
   align-self: flex-end;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 10px 16px;
+  border-radius: 8px;
   border: none;
-  background-color: #007bff;
+  background-color: #1976d2;
   color: white;
   cursor: pointer;
+  font-weight: 600;
 }
 
-/* --- Like/Delete buttons --- */
+.post-button:hover { background-color: #1565c0; }
+
+/* Like/Delete buttons */
 .icon-btn {
   border: none;
   background: transparent;
@@ -81,32 +139,49 @@
   transition: transform 0.15s ease, color 0.15s ease;
 }
 
-.icon-btn:hover {
-  transform: scale(1.2);
-}
+.icon-btn:hover { transform: scale(1.2); }
+.icon-btn:active { transform: scale(0.9); }
 
-/* אפקט קליק */
-.icon-btn:active {
-  transform: scale(0.9);
-}
+.icon-btn.liked { color: #e63946; }
+.icon-btn.delete { color: #888; }
+.icon-btn.delete:hover { color: #e63946; }
 
-/* Liked state */
-.icon-btn.liked {
-  color: #e63946; /* אדום */
-}
-
-/* Delete button */
-.icon-btn.delete {
-  color: #888;
-}
-
-.icon-btn.delete:hover {
-  color: #e63946;
-}
-
-/* Like counter */
 .like-count {
   color: #666;
   font-size: 0.9em;
   margin-left: 4px;
+}
+
+/* Empty state */
+.feed-empty {
+  text-align: center;
+  padding: 28px 16px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  margin: 20px 0;
+  color: #475569;
+}
+
+.feed-empty h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.feed-empty p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #475569;
+}
+.feed-empty .feed-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
 }

@@ -18,11 +18,19 @@ def create_message_db(db: Session, message_data: MessageCreate, sender_id: str):
 
 
 def get_messages_for_user_db(db: Session, user_id: str) -> List[Message]:
-    """Get all direct messages where the user is either sender or recipient"""
-    return db.query(Message).filter(
-        (Message.sender_id == user_id) | 
-        ((Message.recipient_id == user_id) & ~Message.is_group)
-    ).order_by(Message.timestamp).all()
+    """Return all direct (non-group) messages where the user is sender or recipient."""
+    return (
+        db.query(Message)
+        .filter(
+            (
+                (Message.sender_id == user_id) & (Message.is_group == False)
+            ) | (
+                (Message.recipient_id == user_id) & (Message.is_group == False)
+            )
+        )
+        .order_by(Message.timestamp)
+        .all()
+    )
 
 
 def create_group_db(db: Session, group_data: GroupCreate) -> Group:
@@ -34,15 +42,13 @@ def create_group_db(db: Session, group_data: GroupCreate) -> Group:
 
 
 def add_user_to_group_db(db: Session, group_id: int, user_id: str) -> GroupMembership:
-    # Check if user is already in group
     existing = db.query(GroupMembership).filter(
         GroupMembership.group_id == group_id,
         GroupMembership.user_id == user_id
     ).first()
-    
     if existing:
         return existing
-    
+
     membership = GroupMembership(group_id=group_id, user_id=user_id)
     db.add(membership)
     db.commit()
@@ -55,14 +61,15 @@ def get_group_db(db: Session, group_id: int) -> Group:
 
 
 def get_group_messages_db(db: Session, group_id: int) -> List[Message]:
-    return db.query(Message).filter(
-        Message.recipient_id == str(group_id),
-        Message.is_group == True
-    ).order_by(Message.timestamp).all()
+    return (
+        db.query(Message)
+        .filter(Message.recipient_id == str(group_id), Message.is_group == True)
+        .order_by(Message.timestamp)
+        .all()
+    )
 
 
 def is_user_in_group_db(db: Session, group_id: int, user_id: str) -> bool:
-    """Check if a user is a member of a group"""
     membership = db.query(GroupMembership).filter(
         GroupMembership.group_id == group_id,
         GroupMembership.user_id == user_id
@@ -71,8 +78,7 @@ def is_user_in_group_db(db: Session, group_id: int, user_id: str) -> bool:
 
 
 def get_group_members_db(db: Session, group_id: int) -> List[str]:
-    """Get all member IDs for a group"""
     memberships = db.query(GroupMembership).filter(
         GroupMembership.group_id == group_id
     ).all()
-    return [membership.user_id for membership in memberships]
+    return [m.user_id for m in memberships]

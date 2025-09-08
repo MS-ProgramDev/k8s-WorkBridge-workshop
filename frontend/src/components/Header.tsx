@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import logo from '../assets/logo.jpg';
 import './Header.css';
 import { API_BASE } from '../config';
-import { chatApi, UserSearchResult } from '../utils/chatApi'; // <-- added
+import { chatApi, UserSearchResult } from '../utils/chatApi';
 
 type Me = {
   email: string;
@@ -58,9 +58,9 @@ const Header: React.FC = () => {
   // search state
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
-  const [results, setResults] = useState<UserSearchResult[]>([]); // <-- added
-  const [highlight, setHighlight] = useState<number>(-1);         // <-- added
-  const searchWrapRef = useRef<HTMLDivElement | null>(null);       // <-- added
+  const [results, setResults] = useState<UserSearchResult[]>([]);
+  const [highlight, setHighlight] = useState<number>(-1);
+  const searchWrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -85,12 +85,10 @@ const Header: React.FC = () => {
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
       const t = e.target as Node;
-      // close user menu
       if (menuOpen && menuRef.current && !menuRef.current.contains(t) &&
           btnRef.current && !btnRef.current.contains(t)) {
         setMenuOpen(false);
       }
-      // close search dropdown
       if (showResults && searchWrapRef.current && !searchWrapRef.current.contains(t)) {
         setShowResults(false);
         setHighlight(-1);
@@ -111,7 +109,7 @@ const Header: React.FC = () => {
     };
   }, [menuOpen, showResults]);
 
-  // debounce search (minimal)
+  // debounce search
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null;
     if (!isAuthenticated) return;
@@ -181,7 +179,9 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="header__left">
         <Link to="/" className="brand">
-          <img src={logo} alt="WorkBridge Logo" className="logo" />
+          <span className="logo-box">
+        <img src={logo} alt="WorkBridge Logo" className="logo" />
+      </span>
           <span>WorkBridge</span>
         </Link>
       </div>
@@ -289,10 +289,7 @@ const Header: React.FC = () => {
                   <span className="drop-ico" aria-hidden>👤</span>
                   <span>Profile</span>
                 </Link>
-                <Link to="/settings" role="menuitem" tabIndex={0} className="drop-item">
-                  <span className="drop-ico" aria-hidden>⚙️</span>
-                  <span>Settings</span>
-                </Link>
+                {/* Settings item removed */}
                 <div className="drop-sep" role="separator" />
                 <button
                   role="menuitem"
